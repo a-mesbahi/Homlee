@@ -4,9 +4,9 @@
             <div class="img-upload">
             <label for="firstImg" class="">
                 <img src="https://img.icons8.com/ios/50/undefined/upload-to-cloud--v1.png"/>
-                Drag and drop or browse files
+                Import Your Projects Picture
             </label>
-            <input type="file" id="firstImg" @change="getImg">
+            <input type="file" id="firstImg" @change="getImg" accept="image/png, image/gif, image/jpeg">
         </div>
         <div class="super-grp">
             <div class="grp">
@@ -40,8 +40,14 @@
 
 <script setup>
 import {ref,reactive} from "vue"
+import Cookies from 'js-cookie'
+import { usePros } from "../../store/test"
+
+const store = usePros()
+
+
 const dataForm = ref({
-    idProfessional:"2",
+    idProfessional:Cookies.get('idPros'),
     img:"",
     title:"",
     tags:[],
@@ -79,13 +85,19 @@ const remove = (id)=>{
 
 const saveProject = async()=>{
     dataForm.value.tags = tagsArray
-    console.log(dataForm.value)
-    let res = await fetch("http://homlee.api/professional/addProject",{
-        method:"POST",
-        body:JSON.stringify(dataForm.value)
-    })
-    let json = await res.json()
-    console.log(json);
+    store.addProject(dataForm.value)
+    dataForm.value.img = ""
+    dataForm.value.tags = []
+    dataForm.value.date = ""
+    dataForm.value.description = ""
+
+
+    // let res = await fetch("http://homlee.api/professional/addProject",{
+    //     method:"POST",
+    //     body:JSON.stringify(dataForm.value)
+    // })
+    // let json = await res.json()
+    // console.log(json);
 
 }
 

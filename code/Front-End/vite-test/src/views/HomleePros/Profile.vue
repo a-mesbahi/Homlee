@@ -4,14 +4,14 @@
         </div>
         <div class="content">
             <div class="profile-info">
-                <img src="https://avatars.dicebear.com/api/croodles/amijea.svg" alt="" srcset="" id="img">
+                <img :src="`https://avatars.dicebear.com/api/croodles/${profile.name}.svg`" alt="" srcset="" id="img">
                 <div class="professional-infos">
-                    <h1>Amine Mesbahi</h1>
-                    <h3>Plumbing</h3>
-                    <p>Little plumbing</p>
+                    <h1>{{profile.name}}</h1>
+                    <h3>{{profile.professional_category}}</h3>
+                    <p>{{profile.business_name}}</p>
                     <span>
                         <img src="/assets/location.png" alt="">
-                        <p>Maroc ,Casablanca 42°B 54°N</p>
+                        <p>{{profile.address}}</p>
                     </span>
                 </div>
                 <div class="media">
@@ -21,7 +21,7 @@
                 </div>
                 <div class="websiteLink">
                     <img src="/assets/website.png" alt="" srcset="">
-                    <a href="">Little plumbing</a>
+                    <a href="">{{profile.business_name}}</a>
                 </div>
                 <div class="date">
                         Member since Nov 15, 2021
@@ -35,7 +35,7 @@
                     </ul>
                     <ul>
                         <li><router-link to="/professional/profile/AddProject"> Add project </router-link></li>|
-                        <li><router-link to="/professional/profile/edit"> Log out </router-link></li>
+                        <li><router-link to="/" @click="logOut"> Log out </router-link></li>
                     </ul>
                 </div>
                 <div class="content">
@@ -47,6 +47,32 @@
 </template>
 
 <script setup>
+import {computed, onBeforeMount} from "vue"
+import { usePros } from "../../store/test"
+import Cookies from 'js-cookie'
+import {useRouter} from 'vue-router'
+
+const router  = useRouter()
+const store = usePros()
+
+const profile = computed(()=>store.professionalData)
+const logOut = async()=>{
+    Cookies.remove('idPros')
+}
+
+onBeforeMount(()=>{
+    if(!Cookies.get('idPros')){
+        router.push('/login_prof')
+    }  
+    store.getProf(Cookies.get("idPros"))
+    store.getProjects(Cookies.get("idPros"))
+})
+
+
+
+
+
+
 
 </script>
 
@@ -100,6 +126,12 @@
                 span{
                     display: flex;
                     color: black;
+                    p{
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        max-width: 250px;
+                    }
                 }
             }
             .media{
@@ -111,7 +143,7 @@
                 }
             }
             .websiteLink{
-                width: 45%;
+                width: 60%;
                 height:40px;
                 display: flex;
                 justify-content: space-around;
@@ -120,6 +152,10 @@
                 a{
                     text-decoration: none;
                     color: black;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: inherit;
+                    max-width: 350px;
                 }
             }
             .date{

@@ -51,7 +51,6 @@
 import { useRoute,useRouter } from 'vue-router'
 import {onMounted,ref} from 'vue'
 import { useStore } from "../../store/test"
-import { Legend } from 'chart.js'
 
 
 const route = useRoute()

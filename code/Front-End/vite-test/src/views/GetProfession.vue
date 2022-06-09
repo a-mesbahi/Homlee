@@ -9,7 +9,7 @@
         <button @click="searchFunction">Search</button>
     </div>
     <div class="container">
-        <div
+        <router-link :to="{ name: 'Professional', params: { id: professional.id } }" tag="div" 
         class="profile"
         v-for="professional in professionalsList"
         :key="professional.id"
@@ -44,7 +44,7 @@
                 <button>Send Message</button>
             </div>
         </div>
-        </div>
+        </router-link>
     </div>
 </div>
 </template>
@@ -74,6 +74,10 @@ $or: #bea100;
 .super-container {
     width: 70%;
     height: max-content;
+a{
+    text-decoration: none;
+    color: black;
+}
 .search {
     width: 100%;
     height: 200px;

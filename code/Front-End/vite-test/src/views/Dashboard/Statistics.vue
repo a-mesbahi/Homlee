@@ -18,8 +18,25 @@
                         </button>
                     </figcaption>
                 </figure>
-                <div class="Add-section">
+                <div class="Add-section" v-if="addSection" @click="toggle">
                     <img src="https://img.icons8.com/external-dreamstale-lineal-dreamstale/64/000000/external-add-ui-dreamstale-lineal-dreamstale.png"/>
+                </div>
+                <div class="Add-from" v-if="addPop">
+                    <div class="input-grp">
+                        <label for="">Title : </label>
+                        <input type="text">
+                    </div>
+                    <div class="input-grp">
+                        <label for="">Image : </label>
+                        <input type="text">
+                    </div>
+                    <div class="textarea">
+                        <label for="">Description : </label>
+                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                    </div>
+                    <div class="button">
+                        <button>Save to gallery</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -28,6 +45,16 @@
 
 <script setup >
 import Courbe from "../../components/Courbe.vue"
+import {ref} from "vue"
+const addSection = ref(true)
+const addPop = ref(false)
+
+const toggle = ()=>{
+    addSection.value = !addSection.value
+    addPop.value = !addPop.value
+}
+
+
 
 </script>
 
@@ -35,9 +62,7 @@ import Courbe from "../../components/Courbe.vue"
 
 
 $base-duration: 500ms;
-
-// Colors
-
+$or : #bea100;
 
 .statistics{
     width: 100%;
@@ -152,6 +177,72 @@ $base-duration: 500ms;
                 font-size: 48px;
                 &:hover{
                     cursor: pointer;
+                }
+            }
+            .Add-from{
+                height: 690px;
+                border: 2px dashed gray;
+                background-color:transparent;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-around;
+                align-items: center;
+                box-sizing: border-box;
+                padding-bottom: 20px;
+                padding-top: 20px;
+                .textarea{
+                    display: flex;
+                    flex-direction: column;
+                    font-size: 18px;
+                    font-weight: bold;
+                    justify-content: center;
+                    width: 90%;
+                    textarea{
+                        border: none;
+                        border-bottom: 2px solid;
+                        width: 90%;
+                        height: 200px;
+                        padding: 7px;
+                        font-size: 16px;
+                        &:focus{
+                            outline: none;  
+                            border-bottom:2px solid $or;
+                        }
+                    }
+                }
+                .input-grp{
+                    display: flex;
+                    flex-direction: column;
+                    font-size: 18px;
+                    font-weight: bold;
+                    justify-content: center;
+                    width: 90%;
+                    input{
+                        border: none;
+                        border-bottom: 2px solid;
+                        width: 90%;
+                        height: 30px;
+                        padding: 7px;
+                        font-size: 16px;
+                        &:focus{
+                            outline: none;  
+                            border-bottom:2px solid $or;
+                        }
+                    }
+                }
+                .button{
+                    button{
+                        width: 160px;
+                        height: 50px;
+                        background-color: transparent;
+                        border: 1px solid;
+                        font-size: 18px;
+                        &:hover{
+                            cursor: pointer;
+                            background-color: black;
+                            color: white;
+                        }
+                    }
                 }
             }
         }

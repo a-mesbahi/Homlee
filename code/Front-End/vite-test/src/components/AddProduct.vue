@@ -112,7 +112,7 @@ const AddNewProduct = async()=>{
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $or : #bea100;
 .addForm-container{
         position:absolute;
@@ -197,25 +197,7 @@ $or : #bea100;
                 height: 100px;
                 display: flex;
                 justify-content: space-around;
-                .input-grp{
-                    display: flex;
-                    flex-direction: column;
-                    font-size: 18px;
-                    font-weight: bold;
-                    justify-content: center;
-                    input{
-                        border: none;
-                        border-bottom: 2px solid;
-                        width: 300px;
-                        height: 30px;
-                        padding: 7px;
-                        font-size: 16px;
-                        &:focus{
-                            outline: none;  
-                            border-bottom:2px solid $or;
-                        }
-                    }
-                }
+
             }
             button{
                 font-weight: bold;

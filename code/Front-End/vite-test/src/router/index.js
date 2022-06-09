@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import GetIdeas from '../views/GetIdeas.vue'
 import GetProfession from '../views/GetProfession.vue'
+import Professional from '../views/Professional.vue'
 import ShopPart from '../views/ShopPart.vue'
 import Index from '../views/Dashboard/Index.vue'
 import Statistics from '../views/Dashboard/Statistics.vue'
@@ -17,6 +18,7 @@ import AddProject from '../views/HomleePros/AddProject.vue'
 import ProfessionalProject from '../views/HomleePros/ProfessionalProject.vue'
 import Login_prof from '../views/HomleePros/Login_prof.vue'
 import ProfessionalEditProfile from '../views/HomleePros/ProfessionalEditProfile.vue'
+import SingleProduct from '../views/HomleePros/SingleProduct.vue'
 import Product from '../views/Product.vue'
 import Contact from '../views/Contact.vue'
 import NotFound from '../views/NotFound.vue'
@@ -71,6 +73,11 @@ const routes = [
                 path:'/professional/profile/AddProject',
                 name: 'AddProject',
                 component:AddProject
+            },
+            {
+                path:'/professional/profile/:id/project',
+                name: 'SingleProduct',
+                component:SingleProduct
             }
         ]
     },
@@ -125,6 +132,11 @@ const routes = [
         path:'/contact',
         name:'Contact',
         component:Contact
+    },
+    {
+        path:'/:id/professional',
+        name:'Professional',
+        component:Professional
     },
     {
         name:"NotFound",

@@ -13,13 +13,9 @@ if(Cookies.get('id')){
 
 setTimeout(() => {
   alert.value = false
-}, 2000);
+},2000);
 
 
-// const id = ref(Cookies.get('id'))
-// if(id){
-//   console.log(id.value);
-// }
 </script>
 
 <template>

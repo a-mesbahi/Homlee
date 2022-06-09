@@ -110,6 +110,7 @@ const showShipping = ref(true)
 const showPayment = ref(false)  
 const showDeliveryData = ref(false)
 const showCartData = ref(false)
+
 const address = ref('')
 const city = ref('')
 const moreInfos = ref('')

@@ -6,19 +6,35 @@
             <p>Please enter your e-mail and password:</p>
             <div class="input-grp">
                 <label for="">Email</label>
-                <input type="email" placeholder="Email">
+                <input type="email" placeholder="Email" v-model="dataForm.email">
             </div>
             <div class="input-grp">
                 <label for="">Password</label>
-                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Password" v-model="dataForm.password">
             </div>
-            <button>Login</button>
+            <button @click="login">Login</button>
         </div>
     </div>
 </template>
 
 <script setup>
 import {ref} from "vue"
+const dataForm = ref({
+    email:"",
+    password:""
+})
+
+
+const login = async()=>{
+    let res = await fetch("http://homlee.api/client/login",{
+        method:'POST',
+        headers: { "Content-Type": "application/json" },
+        body:JSON.stringify(loginData.value)
+    })
+    let json = await res.json()
+    Cookies.set('idProfessional',json.data.id)
+    await router.push('/')
+}
 
 
 </script>

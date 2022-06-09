@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+    <div class="container">
         <form class="form" @submit.prevent="submit">
             <div>
                 <h2>Update your profile </h2>
@@ -7,67 +7,93 @@
             </div>
             <div>
                 <label for="">Business name</label>
-                <input type="text" placeholder="Enter your business name here" v-model="dataForm.business_name" required>
+                <input type="text" placeholder="Enter your business name here" v-model="store.professionalData.name" required>
             </div>
             <div>
                 <label for="">Professional category</label>
-                <input type="text" placeholder="Enter your business category" v-model="dataForm.professional_category" required>
+                <input type="text" placeholder="Enter your business category" v-model="store.professionalData.professional_category" required>
             </div>
             <div>
                 <label for="">Phone number</label>
-                <input type="text" placeholder="For potential clients to reach you" v-model="dataForm.phone_number" required>
+                <input type="text" placeholder="For potential clients to reach you" v-model="store.professionalData.phone_number" required>
             </div>
             <div>
                 <label for="">Address</label>
-                <input type="text" v-model="dataForm.address" required>
+                <input type="text" v-model="store.professionalData.address" required>
             </div>
             <div>
                 <label for="">Business WebSite Address</label>
-                <input type="text" placeholder="WWW." v-model="dataForm.business_site" required>
+                <input type="text" placeholder="WWW." v-model="store.professionalData.business_site" required>
             </div>
             <div>
                 <label for="">Contact name</label>
-                <input type="text" placeholder="Full name" v-model="dataForm.name" required>
+                <input type="text" placeholder="Full name" v-model="store.professionalData.name" required>
             </div>
             <div>
                 <label for="">Create Your free Account</label>
-                <input type="text" placeholder="Enter your e-mail" v-model="dataForm.email" required>
+                <input type="text" placeholder="Enter your e-mail" v-model="store.professionalData.email" required>
             </div>
             <div>
-                <input type="password" placeholder="Current Password" v-model="dataForm.password" required>   
+                <input type="password" placeholder="Current Password" v-model="passwordData.oldPassword" >   
             </div>
-              <div>
-                <input type="password" placeholder="New Password" v-model="dataForm.password" required>   
-              </div>
             <div>
-                <button>Update</button>
+                <input type="password" placeholder="New Password" v-model="passwordData.newPassword" >   
+            </div>
+            
+            <div>
+                <button @click="update">Update</button>
             </div>
         </form>
-      </div>
+    </div>
+    <UpdateDone data-aos="fade-left" v-if="pop"/>
 </template>
 
 <script setup>
-import {ref} from "vue"
-const dataForm = ref({
-    business_name:"",
-    professional_category:"",
-    phone_number:"",
-    address:"",
-    business_site:"",
-    name:"",
-    email:"",
-    password:""
-}) 
+import {ref,computed,reactive} from "vue"
+import { usePros } from "../../store/test"
+import Cookies from 'js-cookie'
+import UpdateDone from "../../components/UpdateDone.vue"
+
+const passwordData = reactive({
+    id:Cookies.get("idPros"),
+    oldPassword:"",
+    newPassword:""
+})
+const pop = ref(false)
+
+const store = usePros()
+
+const update = ()=>{
+    store.editProfile()
+    pop.value = true
+    setTimeout(() => {
+    pop.value = false
+    },2000);
+
+    if(passwordData.oldPassword.length>0 && passwordData.newPassword.length>0){
+            store.changePassword(passwordData)
+    }
+}
+
+
 </script>
+
+
+
+
+
+
+
+
 
 <style lang="scss" scoped>
 .container{
-  width: 100%;
-  height: 94vh;
-  color: black;
-  display: flex;
-  justify-content: center;
-  .form{
+    width: 100%;
+    height: 94vh;
+    color: black;
+    display: flex;
+    justify-content: center;
+    .form{
         width: 97%;
         height: max-content;
         display: grid;

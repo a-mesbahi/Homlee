@@ -6,20 +6,55 @@
             <p>Please enter your e-mail and password:</p>
             <div class="input-grp">
                 <label for="">Email</label>
-                <input type="email" placeholder="Email">
+                <input type="email" placeholder="Email" v-model="dataForm.email">
             </div>
             <div class="input-grp">
                 <label for="">Password</label>
-                <input type="password" placeholder="Password">
+                <input type="password" placeholder="Password" v-model="dataForm.password">
             </div>
-            <button>Login</button>
+            <button @click="login">Login</button>
         </div>
     </div>
 </template>
 
 <script setup>
+import { usePros } from "../../store/test"
+import {ref,computed} from "vue"
 import { useRouter } from 'vue-router'
+import Cookies from 'js-cookie'
+
+const store = usePros()
 const router = useRouter();
+
+const dataForm = ref({
+    email:"",
+    password:""
+})
+const result = computed(()=>
+    store.professionalData
+)
+
+const login = async()=>{
+    if(dataForm.value.email.length>0 && dataForm.value.password.length>0){
+        await store.loginProfessional(dataForm.value)
+        if(Cookies.get("idPros")){
+            router.push('/professional/profile')
+        }else{
+            console.log("nnn");
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
 
 const back = ()=>{
     router.push('/')

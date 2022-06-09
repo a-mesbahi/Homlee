@@ -1,6 +1,28 @@
 <script setup>
-import { ref } from 'vue'
+import { ref,computed} from 'vue'
 import {useStore} from '../store/test'
+import Cookies from 'js-cookie'
+
+const notLogin = computed(()=>{
+    if(Cookies.get('id')){
+        return false
+    }else{
+        return true
+    }
+
+})
+const login = computed(()=>{
+    if(Cookies.get('id')){
+        return true
+    }else{
+        return false
+    }
+})
+
+const logOut = ()=>{
+    Cookies.remove('id')
+
+}
 
 const store = useStore()
 const menuShow = ref(false)
@@ -42,11 +64,12 @@ const showTheMenu = ()=>{
                 <div class="menu-show-body">
                     <div class="menu-list">
                         <ul>
-                            <li><a href="/dashboard/login">Our Admin</a></li>
+                            <li><router-link to="/dashboard/login">Our Admin</router-link></li>
                             <li><a href="">About</a></li>
                             <li><a href="/contact">Contact Us</a></li>
-                            <li><a href="/login_prof">For our Profs ! </a></li>
-                            <li><a href="/login">Login / signup </a></li>
+                            <li><router-link to="/login_prof">For our Profs ! </router-link></li>
+                            <li v-if="notLogin"><a href="/login">Login / signup </a></li>
+                            <li v-if="login" @click="logOut"><router-link to="/">Logout</router-link></li>
                         </ul>
                     </div>
                     <div class="menu-deco">
@@ -71,6 +94,9 @@ const showTheMenu = ()=>{
             
     </div>
 </template>
+
+
+
 
 <style scoped lang="scss">
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');

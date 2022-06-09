@@ -4,9 +4,9 @@
         <div class="container">
             <div v-for="picture in pictures" :key="picture.id" >
                 <img :src="picture.url" alt="">
-                <span>08/11/2002<img src="https://img.icons8.com/ios/24/000000/like--v1.png"/></span>
-                <h2>Lorem ipsum dolor sit amet consectetur.</h2>
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic quis molestias aliquam odio doloribus, perferendis odit possimus ipsam facere consectetur magnam atque delectus laboriosam eos nesciunt. At iusto delectus illo!Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic quis molestias aliquam odio doloribus, perferendis odit possimus ipsam facere consectetur magnam atque delectus laboriosam eos nesciunt. At iusto delectus illo!</p>
+                <span>{{picture.date_creation}}<img src="https://img.icons8.com/ios/24/000000/like--v1.png"/></span>
+                <h2>{{picture.title}}</h2>
+                <p>{{picture.description}}</p>
             </div>
         </div>
     </div>
@@ -23,7 +23,7 @@ const getPictures = async()=>{
     })
     let json = await res.json()
     pictures.value  = await json.data 
-    console.log(pictures)
+    console.log(pictures.value)
 
 } 
 onMounted(()=>{
@@ -78,7 +78,7 @@ onMounted(()=>{
                 font-size: 20px;
             }
             span{
-                
+                font-size: 14px;
                 margin-top: 10px;
                 width: 90%;
                 color: rgb(107, 107, 107);

@@ -8,7 +8,7 @@ const store = useStore()
 
 const productsList = computed(()=>
     store.listProducts
-    )
+)
 
 
 const toggleFilterMenu = ()=>{
@@ -128,6 +128,9 @@ $or : #bea100;
         height: 70px;
         display: flex;
         justify-content: space-between;
+        @media screen and (max-width:700px) {
+            display: none;
+        }
         .left{
             font-weight: bold;
         }
@@ -198,6 +201,9 @@ $or : #bea100;
         height: 50px;
         margin: auto;
         margin-top:30px ;
+        @media screen and (max-width:700px) {
+            width: 90%;
+        }
         .definitions{
             margin: auto;
             width: 80%;
@@ -221,6 +227,10 @@ $or : #bea100;
         row-gap:20px ;
         overflow: auto;
         justify-items: center;
+        @media screen and (max-width:700px) {
+            width: 95%;
+            height: max-content;
+        }
         .product{
             color: #000;
             width: 80%;
@@ -230,13 +240,9 @@ $or : #bea100;
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
             column-gap: 10px;
             text-decoration: none;
-            // div{
-            //     // background-color: crimson;
-            // }
             .product-price,.product-status,.product-sell,.product-quantity{
                 display: flex;
                 align-items: center;
-                // justify-content: center;
             }
             .product-info{
                 width: 140px;
