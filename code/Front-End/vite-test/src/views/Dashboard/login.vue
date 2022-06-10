@@ -4,10 +4,17 @@
         <div class="form">
             <h3>Welcome Admin</h3>
             <p>Please enter your e-mail and password:</p>
-            <div class="input-grp">
-                <label for="">Email</label>
-                <input type="email" placeholder="Email" v-model="dataForm.email">
-            </div>
+            <!-- <div class="input-grp"> -->
+                <!-- <label for="">Email</label> -->
+            <FormKit
+            :classes="{
+                outer: '$reset input-grp',
+            }"
+            type="text"
+            label="Username"
+            validation="required|alpha|length:10"
+            />
+            <!-- </div> -->
             <div class="input-grp">
                 <label for="">Password</label>
                 <input type="password" placeholder="Password" v-model="dataForm.password">
@@ -75,6 +82,7 @@ $or : #bea100;
             margin-bottom: 20px;
             font-weight: bold;
             input{
+                background-color: #eee;
                 height: 40px;
                 border:none;
                 border-bottom:2px solid;

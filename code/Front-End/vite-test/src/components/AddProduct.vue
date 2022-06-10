@@ -29,33 +29,73 @@
 
                 </div>
             </div>
-            <div class="double-input-grp">
-                <div class="input-grp">
-                <label for="">Name of product</label>
-                    <input type="text" placeholder="Name of product" v-model="formData.name">
+            <div class="form">
+                <div class="twoInputs">
+                    <div class="input">
+                        <FormKit
+                        type="text"
+                        label="Name of product"
+                        validation="required|text|length:10"
+                        validation-visibility="live"
+                        />
+                    </div>
+                    <div class="input">
+                        <FormKit
+                        type="number"
+                        label="Price of product"
+                        validation="required|number|length:1"
+                        validation-visibility="live"
+                        />
+                    </div>
                 </div>
-                <div class="input-grp">
-                    <label for="">Price </label>
-                    <input type="number" placeholder="Price" v-model="formData.price">
+                <div class="twoInputs">
+                    <div class="input">
+                        <FormKit
+                            type="select"
+                            label="Product category"
+                            placeholder="Select a category"
+                            :options="[
+                                'Furniture',
+                                'Outdoor',
+                                'Rugs & Decor',
+                                'Lighting',
+                                'Bath',
+                                'Bath',
+                                'Home Decor',
+                                'Kitchen & Tabletop',
+                                'Living',
+                                'Storage & Organization',
+                            ]"
+                            validation="required"
+                        />
+                    </div>
+                    <div class="input">
+                        <FormKit
+                        type="number"
+                        label="Quantity of product"
+                        validation="required|number|length:1"
+                        validation-visibility="live"
+                        />
+                    </div>
                 </div>
-            </div>
-            <div class="double-input-grp">
-                <div class="input-grp">
-                <label for="">Product Category</label>
-                    <input list="category" type="text" placeholder="Product category" v-model="formData.category">
-                    <datalist id="category">
-                        <option value="hello"></option>
-                        <option value="bay"></option>
-                    </datalist>
+                <div class="twoInputs">
+                    <div class="input">
+                        <FormKit
+                        type="text"
+                        label="Price of product"
+                        validation="required|text|length:1"
+                        validation-visibility="live"
+                        />
+                    </div>
+                    <div class="input">
+                        <FormKit
+                        type="textarea"
+                        label="Your Essay"
+                        rows="08"
+                        placeholder="Remember to write in complete sentences."
+                        />
+                    </div>
                 </div>
-                <div class="input-grp">
-                    <label for="">Quantity </label>
-                    <input type="number" placeholder="Quantity" v-model="formData.quantity">
-                </div>
-            </div>
-            <div class="img-input">
-                <label for="">Product Image</label>
-                <input  type="text" placeholder="Product image" v-model="formData.img">
             </div>
             <button >Add the product</button>
         </form>
@@ -130,7 +170,6 @@ $or : #bea100;
             z-index: 1000;
             box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
             align-self: center;
-            
             form{
                 width: 100%;
                 height: 100%;
@@ -140,12 +179,6 @@ $or : #bea100;
                     background-color: rgba(220, 220, 220, 0.437);
                     padding: 10px;
                     
-                }
-                .input-grp{
-                    input[type=number]::-webkit-inner-spin-button {
-                        -webkit-appearance: none;
-                        opacity: 1;
-                        }
                 }
                 .product-info{
                     margin: auto;
@@ -168,44 +201,33 @@ $or : #bea100;
                         }
                     }
                 }
-            }
-            .img-input{
-                width: 90%;
-                margin: auto;
-                margin-top: 30px;
-                display: flex;
-                flex-direction: column;
-                font-size: 18px;
-                font-weight: bold;
-                justify-content: center;
-                input{
-                    border: none;
-                    border-bottom: 2px solid;
-                    width: 70%;
-                    height: 30px;
-                    padding: 7px;
-                    font-size: 16px;
-                    &:focus{
-                        outline: none;  
-                        border-bottom:2px solid $or;
+                .form{
+                    width: 90%;
+                    min-height: 450px;
+                    margin: auto;
+                    display: flex;
+                    flex-direction: column;
+                    margin-top: 6px;
+                    .twoInputs{
+                        width: 100%;
+                        min-height: 100px;
+                        display: flex;
+                        .input{
+                            width: 50%;
+                            min-height: 100px;                  
+                            // border: 1px solid;
+                        }
                     }
                 }
             }
-            .double-input-grp{
-                margin-top: 30px;
-                width: 100%;
-                height: 100px;
-                display: flex;
-                justify-content: space-around;
-
-            }
+            
             button{
                 font-weight: bold;
                 width: 180px;
                 height: 50px;
                 background-color: transparent;
                 color: black;
-                margin-top: 40px;
+                margin-top: 30px;
                 border: 2px solid ;
                 margin-left:37% ;
                 font-size: 15px;

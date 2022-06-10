@@ -63,5 +63,53 @@ $or : #bea100;
 .footer{
   margin-top: auto;
 }
+.input-grp{
+    width: 80%;
+    min-height: 70px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    font-weight: bold;
+    input[type=number] {
+      width: 50%;
+    }
+    input{
+        width: 100%;
+        height: 40px;
+        border:none;
+        border-bottom:2px solid;
+        padding:6px ;
+        font-size: 16px;
+    }
+    input:focus{
+        outline: none;  
+        border-bottom:2px solid $or;
+    }
+}
+.message{
+  color: rgb(179, 179, 179);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: lighter;
+  list-style: none;
+}
+select{
+  width: 80%;
+  border: 2px solid ;
+  height: 40px;
+  label{
+      margin-bottom: 3px;
+  }
+}
+textarea{
+  width: 100%;
+  resize: none;
+  border: 2px solid;
+  box-sizing: border-box;
+  padding: 7px;
+  label{
+      margin-bottom: 3px;
+    }
+}
 
 </style>

@@ -9,7 +9,7 @@
                     <p class="price"> $ 5.9</p>
                 </div>
             </div>
-            <div class="delivery-type">
+            <div class="delivery-type" @click="Payment">
                 <img src="https://img.icons8.com/ios/50/000000/small-business.png"/>
                 <div class="info-delivery">
                     <h3>DELIVERY IN STORE</h3>
@@ -62,11 +62,11 @@
             <div class="form">
                 <div class="input-grp">
                     <label for="">Card number</label>
-                    <input type="text" placeholder="Card number" v-model="data.cardNumber">
+                    <input type="text" placeholder="Card number" >
                 </div>
                 <div class="input-grp">
                     <label for="">Card name</label>
-                    <input type="text" placeholder="Card name">
+                    <input type="text" placeholder="Card name" v-model="data.cardName">
                 </div>
                 <div class="input-grp">
                     <div>
@@ -124,7 +124,6 @@ const data = ref({
     product_id:props.product.id,
     address:'',
     client_id:Cookies.get('id'),
-    order_date:'',
     cardName:'',
     quantity:''
 })
@@ -136,10 +135,15 @@ const DeliveryData = ()=>{
 }
 
 const Payment = ()=>{
-    if(country.value ){
+    if(country.value && data.value.address){
         showDeliveryData.value = false
         showCartData.value = true
-        data.value.location = country.value+' '+city.value+' '+address.value
+        data.value.address = country.value+' '+city.value+' '+address.value
+    }
+    if(data.value.address.length==0 ){  
+        showShipping .value = false
+        showCartData.value = true
+        data.value.address = city.value+" Store"
     }
 }
 

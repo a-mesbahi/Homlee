@@ -2,8 +2,11 @@
 import { ref,computed} from 'vue'
 import {useStore} from '../store/test'
 import Cookies from 'js-cookie'
+import { useRouter, useRoute } from 'vue-router'
 
-const notLogin = computed(()=>{
+const router = useRouter();
+
+let notLogin = computed(()=>{
     if(Cookies.get('id')){
         return false
     }else{
@@ -21,7 +24,6 @@ const login = computed(()=>{
 
 const logOut = ()=>{
     Cookies.remove('id')
-
 }
 
 const store = useStore()
@@ -32,7 +34,7 @@ const showTheMenu = ()=>{
 </script>
 
 <template>
-    <div class="nav-container">
+    <div class="nav-container" >
         <nav>
             <div class="super-logo">
                 <div class="logo">
@@ -69,7 +71,7 @@ const showTheMenu = ()=>{
                             <li><a href="/contact">Contact Us</a></li>
                             <li><router-link to="/login_prof">For our Profs ! </router-link></li>
                             <li v-if="notLogin"><a href="/login">Login / signup </a></li>
-                            <li v-if="login" @click="logOut"><router-link to="/">Logout</router-link></li>
+                            <li v-if="login" @click="logOut"><a href="/">Logout</a></li>
                         </ul>
                     </div>
                     <div class="menu-deco">

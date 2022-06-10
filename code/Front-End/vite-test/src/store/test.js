@@ -80,8 +80,7 @@ actions: {
             body:JSON.stringify(passwordData)
         })
     },
-    async getProjects(id)
-    {
+    async getProjects(id){
         let res = await fetch(`http://homlee.api/professional/getProjects/${id}`)
         let json = await res.json()
         this.professionalProjects = json.data
