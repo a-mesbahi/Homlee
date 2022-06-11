@@ -4,14 +4,21 @@
         <div class="form">
             <h3>Welcome Professional</h3>
             <p>Please enter your e-mail and password:</p>
-            <div class="input-grp">
-                <label for="">Email</label>
-                <input type="email" placeholder="Email" v-model="dataForm.email">
-            </div>
-            <div class="input-grp">
-                <label for="">Password</label>
-                <input type="password" placeholder="Password" v-model="dataForm.password">
-            </div>
+            <FormKit
+            type="text"
+            label="Email"
+            placeholder="Email"
+            validation="required|length:10"
+            v-model="dataForm.email"
+            />
+            <FormKit
+                type="password"
+                name="password"
+                label="Password"
+                placeholder="Password"
+                validation="required"
+                v-model="dataForm.password"
+            />
             <button @click="login">Login</button>
         </div>
     </div>

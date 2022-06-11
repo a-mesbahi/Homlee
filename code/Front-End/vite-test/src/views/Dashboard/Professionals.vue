@@ -14,17 +14,18 @@
                     <p>{{prof.address}}</p>
                     <div class="buttons">
                         <button>Projects</button>
-                        <button>Message</button>
+                        <button @click="sendEmail(prof.email)">Send email</button>
                     </div>
                 </div>
             </div>
         </div>
+        <Email/>
     </div>
 </template>
 
 <script setup>
 import {ref} from "vue"
-
+import Email from "../../components/Email.vue"
 const profs = ref('')
 
 
@@ -51,6 +52,7 @@ getProfs()
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
     h2{
         padding: 20px;
     }

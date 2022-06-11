@@ -1,21 +1,24 @@
 <template>
     <div class="container">
-        <h3 class="logo">Homlee</h3>
+        <h3 class="logo"><router-link to="/">Homlee</router-link></h3>
         <div class="form">
             <h3>Welcome Admin</h3>
             <p>Please enter your e-mail and password:</p>
-            <!-- <div class="input-grp"> -->
-                <!-- <label for="">Email</label> -->
             <FormKit
             type="text"
             label="Email"
+            placeholder="Email"
             validation="required|length:10"
+            v-model="dataForm.email"
             />
-            <!-- </div> -->
-            <div class="input-grp">
-                <label for="">Password</label>
-                <input type="password" placeholder="Password" v-model="dataForm.password">
-            </div>
+            <FormKit
+                type="password"
+                name="password"
+                label="Password"
+                placeholder="Password"
+                validation="required"
+                v-model="dataForm.password"
+            />
             <button @click="login">Login</button>
         </div>
     </div>
@@ -56,6 +59,10 @@ $or : #bea100;
         letter-spacing: 10px;
         position: absolute;
         top: 10px;
+        a{
+            text-decoration: none;
+            color: black;
+        }
     }
     .form{
         padding: 30px;
