@@ -38,7 +38,7 @@ const showTheMenu = ()=>{
         <nav>
             <div class="super-logo">
                 <div class="logo">
-                    <h1>Homlee</h1>
+                    <h1><router-link to="/">Homlee</router-link></h1>
                 </div>
             </div>
             <div class="menu" @click="showTheMenu">
@@ -273,6 +273,10 @@ $or: #bea100;
                 align-items: center;
                 background-color:transparent;
                 margin-top: 10px;
+                a{
+                    text-decoration: none;
+                    color:black;
+                }
             img{
                 width: 100%;
                 height:100%;

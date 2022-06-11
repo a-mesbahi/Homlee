@@ -35,16 +35,20 @@
                         <FormKit
                         type="text"
                         label="Name of product"
-                        validation="required|text|length:10"
+                        validation="required|text"
                         validation-visibility="live"
+                        placeholder="Enter the name of the product."
+                        v-model="formData.name"
                         />
                     </div>
                     <div class="input">
                         <FormKit
                         type="number"
                         label="Price of product"
-                        validation="required|number|length:1"
+                        validation="required|number"
                         validation-visibility="live"
+                        placeholder="Price "
+                        v-model="formData.price"
                         />
                     </div>
                 </div>
@@ -67,14 +71,17 @@
                                 'Storage & Organization',
                             ]"
                             validation="required"
+                            v-model="formData.category"
                         />
                     </div>
                     <div class="input">
                         <FormKit
                         type="number"
                         label="Quantity of product"
-                        validation="required|number|length:1"
+                        validation="required|number"
                         validation-visibility="live"
+                        placeholder="Quantity"
+                        v-model="formData.quantity"
                         />
                     </div>
                 </div>
@@ -82,9 +89,11 @@
                     <div class="input">
                         <FormKit
                         type="text"
-                        label="Price of product"
-                        validation="required|text|length:1"
+                        label="Image of product"
+                        validation="required|text"
                         validation-visibility="live"
+                        v-model="formData.img"
+                        placeholder="Enter the image of product."
                         />
                     </div>
                     <div class="input">
@@ -92,7 +101,9 @@
                         type="textarea"
                         label="Your Essay"
                         rows="08"
+                        validation="required|text"
                         placeholder="Remember to write in complete sentences."
+                        v-model="formData.description"
                         />
                     </div>
                 </div>
@@ -125,6 +136,7 @@ const formData = ref({
     category:'',
     quantity:'',
     img:'',
+    description:'',
     status:'Available',
     sales:0,
 })
@@ -157,7 +169,7 @@ $or : #bea100;
 .addForm-container{
         position:absolute;
         width: 100%;
-        height: 106vh;
+        min-height: 106vh;
         background-color: rgba(0, 0, 0, 0.204);
         display: flex;
         justify-content: center;
@@ -228,6 +240,7 @@ $or : #bea100;
                 background-color: transparent;
                 color: black;
                 margin-top: 30px;
+                margin-bottom: 15px;
                 border: 2px solid ;
                 margin-left:37% ;
                 font-size: 15px;

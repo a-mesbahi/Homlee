@@ -9,7 +9,7 @@
         <button @click="searchFunction">Search</button>
     </div>
     <div class="container">
-        <router-link :to="{ name: 'Professional', params: { id: professional.id } }" tag="div" 
+        <router-link :to="{ name: 'Professional', params: { id: professional.id } }" tag="div"
         class="profile"
         v-for="professional in professionalsList"
         :key="professional.id"
@@ -41,7 +41,7 @@
                 </p>
             </div>
             <div class="button">
-                <button>Send Message</button>
+                <!-- <button @click="message">Send Message</button> -->
             </div>
         </div>
         </router-link>
@@ -58,11 +58,13 @@ console.log(store.listProfessionals)
 const search = ref("");
 const professionalsList = computed(() =>
     store.listProfessionals.filter((e) => {
-        return e.professional_category.includes(search.value) 
+        return e.professional_category.toLowerCase().includes(search.value.toLowerCase()) 
     })
 );
 
-
+const message = ()=>{
+    console.log("ww");
+}
 onBeforeMount(() => {});
 
 

@@ -5,14 +5,14 @@
         </div>
         <div class="underside">
             <div class="infos">
-                <figure class="image-block" v-for="i in 3" :key="i">
-                    <h1>Lorem ipsum dolor sit amet consectetur.</h1>
-                    <img src="https://images.pexels.com/photos/3049121/pexels-photo-3049121.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
+                <figure class="image-block" v-for="element in adds" :key="element.id">
+                    <h1>{{element.title}}</h1>
+                    <img :src="element.url" alt="" />
                     <figcaption>
                         <h3>
                             More Info
                         </h3>
-                        <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>
+                        <p>{{element.description}}</p>
                         <button>
                             More Info
                         </button>
@@ -45,7 +45,7 @@
 
 <script setup >
 import Courbe from "../../components/Courbe.vue"
-import {ref} from "vue"
+import {ref,onMounted} from "vue"
 const addSection = ref(true)
 const addPop = ref(false)
 
@@ -53,8 +53,16 @@ const toggle = ()=>{
     addSection.value = !addSection.value
     addPop.value = !addPop.value
 }
+const adds = ref([])
 
-
+const getAdds = async()=>{
+    let res = await fetch("http://homlee.api/gallery/getForAdmin")
+    let json = await res.json()
+    adds.value = json.data
+}
+onMounted(()=>{
+    getAdds()
+})
 
 </script>
 

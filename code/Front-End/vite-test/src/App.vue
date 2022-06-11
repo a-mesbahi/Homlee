@@ -79,7 +79,7 @@ $or : #bea100;
         border:none;
         border-bottom:2px solid;
         padding:6px ;
-        font-size: 16px;
+        font-size: 14px;
     }
     input:focus{
         outline: none;  
@@ -87,7 +87,7 @@ $or : #bea100;
     }
 }
 .message{
-  color: rgb(179, 179, 179);
+  color: rgb(255, 72, 72);
   text-decoration: none;
   font-size: 13px;
   font-weight: lighter;
@@ -97,13 +97,13 @@ select{
   width: 80%;
   border: 2px solid ;
   height: 40px;
-  label{
-      margin-bottom: 3px;
-  }
+  border-radius: 0px;
+  
 }
 textarea{
   width: 100%;
   resize: none;
+  font-size: 14px;
   border: 2px solid;
   box-sizing: border-box;
   padding: 7px;

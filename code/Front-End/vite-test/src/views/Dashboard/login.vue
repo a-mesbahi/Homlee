@@ -7,12 +7,9 @@
             <!-- <div class="input-grp"> -->
                 <!-- <label for="">Email</label> -->
             <FormKit
-            :classes="{
-                outer: '$reset input-grp',
-            }"
             type="text"
-            label="Username"
-            validation="required|alpha|length:10"
+            label="Email"
+            validation="required|length:10"
             />
             <!-- </div> -->
             <div class="input-grp">
