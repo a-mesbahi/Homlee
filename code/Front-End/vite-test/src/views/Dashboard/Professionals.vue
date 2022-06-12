@@ -19,7 +19,7 @@
                 </div>
             </div>
         </div>
-        <Email/>
+        <Email v-if="emailFrom" :profEmail="profEmail" @close="close"/>
     </div>
 </template>
 
@@ -27,6 +27,18 @@
 import {ref} from "vue"
 import Email from "../../components/Email.vue"
 const profs = ref('')
+
+const emailFrom = ref(false)
+const profEmail = ref("")
+
+const sendEmail = (email)=>{
+    emailFrom.value = true
+    profEmail.value = email
+    console.log(email);
+}
+const close = ()=>{
+    emailFrom.value = false
+}
 
 
 const getProfs = async()=>{

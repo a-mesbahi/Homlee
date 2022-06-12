@@ -10,6 +10,7 @@
   "dependencies": {
     "@formkit/vue": "^1.0.0-beta.8",
     "@google/model-viewer": "^1.12.0",
+    "@tinymce/tinymce-vue": "^4.0.7",
     "aos": "^2.3.4",
     "chart.js": "^3.7.1",
     "cookie-parser": "^1.4.6",
