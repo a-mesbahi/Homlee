@@ -2,7 +2,7 @@
     <div class="container">
         <div class="header">
             <h1>Orders</h1>
-            <p>34 Orders found</p>
+            <p>{{orders.length}} Orders found</p>
         </div>
         <div class="content">
             <div class="order" v-for="item in orders" :key="item.id">
@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="bottom">
-                    <img src="https://st.hzcdn.com/simgs/a9a1859a0a2f0856_4-4105/home-design.jpg" alt="" srcset="">
+                    <img :src="item.img" alt="" srcset="">
                     <div class="buttons">
                         <h4>{{item.product_name}}</h4>
                         <div class="checkbox">
@@ -45,6 +45,11 @@ const getOrders = async ()=>{
     orders.value = json.data
     console.log(json.data)
 }
+
+const complateOrder = (id)=>{
+    console.log(id);
+}
+
 
 onMounted(()=>{
     getOrders()
@@ -127,7 +132,7 @@ onMounted(()=>{
                     align-items: flex-start;
                 }
                 img{
-                    width: 20%;
+                    width: 10%;
                     @media screen and (max-width:500px) {
                         margin-top: 30px;
                         margin-bottom: 30px;

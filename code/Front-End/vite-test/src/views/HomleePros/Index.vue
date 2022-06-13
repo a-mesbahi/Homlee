@@ -22,12 +22,17 @@
                 <input type="text" v-model="dataForm.address" required>
             </div>
             <div class="others">
+                <label for="">Contact name</label>
+                <input type="text" placeholder="Full name" v-model="dataForm.name" required>
+            </div>
+            <div class="others">
                 <label for="">Business WebSite Address</label>
                 <input type="text" placeholder="WWW." v-model="dataForm.business_site" required>
             </div>
-            <div class="others">
-                <label for="">Contact name</label>
-                <input type="text" placeholder="Full name" v-model="dataForm.name" required>
+            <div class="image">
+                <img src="https://img.icons8.com/ios-glyphs/30/undefined/image-file.png"/>
+                <label for="businessImage">Image for your business</label>
+                <input type="file" @change="getImg" id="businessImage" required>
             </div>
             <div class="others">
                 <label for="">Create Your free Account</label>
@@ -44,13 +49,13 @@
                     product news, and best practices at the number provided pursuant to <a href="">Homlee's Terms of Use</a></span>
                 </span>
             </div>
-            <div>
+            <div class="others">
                 <button>Join Us</button>
             </div>
         </form>
         <div class="pic">
             <h2>{{
-                "Your Business Name Here" || dataForm.business_name
+                !dataForm.business_name?"Your Business Category":dataForm.business_name
                 }}</h2>
             <p>
                 {{
@@ -80,6 +85,7 @@ const dataForm = ref({
     phone_number:"",
     address:"",
     business_site:"",
+    business_img:"",
     name:"",
     email:"",
     password:""
@@ -93,6 +99,10 @@ const error = ref({
     business_site:""
 })
 
+const getImg = (e)=>{
+    let file = e.target.files[0]
+    dataForm.value.business_img = file.name
+}
 
 
 const submit = async()=>{
@@ -108,7 +118,6 @@ const submit = async()=>{
             body:JSON.stringify(dataForm.value)
         })
         let json = await res.json()
-        console.log(json)
         store.listProfessionals.push(dataForm.value)
         dataForm.value = ref({
             id:json.id,
@@ -118,6 +127,7 @@ const submit = async()=>{
             name:"",
             address:"",
             business_site:"",
+            business_img:"",
             email:"",
             password:""
         }) 
@@ -146,13 +156,38 @@ $or : #bea100;
         height: max-content;
         display: grid;
         grid-template-rows: repeat(8,1fr);
-        margin-top: 100px;
+        margin-top: 58px;
         row-gap: 10px;
         @media screen and (max-width:500px) {
             width: 90%;
-            row-gap: 39px;
+            display: block;
         }
-        div{
+        .image{
+            width: max-content;
+            display: flex;
+            align-items: center;
+            border: 2px solid rgb(186, 186, 186);
+            font-size: 16px;
+            color: black;
+            width: 80%;
+            padding: 7px;
+            font-weight: 600;
+            img{
+                margin-right: 7px;
+            }
+            @media screen and (max-width:500px) {
+                width: 90%;
+            }
+            label{
+                &:hover{
+                    cursor: pointer;
+                }
+            }
+            input[type=file] {
+                display: none;
+            }   
+        }
+        .others{
             display: flex;
             flex-direction: column;
             font-weight: bold;
@@ -213,18 +248,20 @@ $or : #bea100;
         }
     }
     .pic{
+        height: 93%;
+        margin-top: 55px;
         background-image: url('/assets/profile-preview-bg@2x.png');
         background-size: cover;
         background-position: center;
         position: relative;
         h2{
             position: absolute;
-            top: 287px;
+            top: 273px;
             left: 147px;
         }
         p{
             position: absolute;
-            top:  317px;
+            top:  300px;
             left: 150px;
         }
         @media screen and (max-width:500px) {

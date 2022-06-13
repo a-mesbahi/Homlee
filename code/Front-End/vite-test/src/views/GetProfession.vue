@@ -16,10 +16,9 @@
         >
         <div
         class="job-pic"
-        style="
-            background-image: url('https://st.hzcdn.com/fimgs/10f15b950bc72a76_9197-w368-h207-b0-p0---.jpg');
-            "
-        ></div>
+        :style="{ backgroundImage: `url(/assets/${professional.img})` }"
+        >
+        </div>
         <div class="profile-desc">
             <div>
                 <p><span>Professional Name :</span> {{ professional.name }}</p>

@@ -135,6 +135,9 @@ $or: #bea100;
             display: flex;
             justify-content: center;
             align-items: center;
+            @media screen and(max-width:800px) {
+                width: 80%;
+            }
             ul{
                 li{
                     list-style: none;
@@ -147,6 +150,9 @@ $or: #bea100;
                         letter-spacing: -0.04em;
                         line-height: 1.3;
                         transition-duration: 1000ms;
+                        @media screen and(max-width:800px) {
+                            font-size: 24px;
+                        }
                     }
                     a:hover{
                         color: white;
@@ -161,6 +167,9 @@ $or: #bea100;
             flex-direction: column;
             justify-content: center;
             color: rgba(189, 189, 189, 0.973);
+            @media screen and (max-width:800px){
+                display: none;
+            }
             p{
                 width: 50%;
                 text-align: justify;
@@ -190,6 +199,9 @@ $or: #bea100;
                 list-style: none;
                 display: flex;
                 justify-content: space-around;
+                @media screen and (max-width:800px) {
+                    flex-direction: column;
+                }
                 a{
                     text-decoration: none;
                     color: white;
