@@ -10,7 +10,12 @@ export const useStore = defineStore('test',{
         listProducts:[],
         listProfessionals:[],
         professionalInfos:null,
-    })
+    }),
+    actions : {
+        remove(id){
+            
+        }
+    }
 })
 
 

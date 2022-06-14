@@ -5,7 +5,7 @@
                 <p>{{productToEdit.name}}</p>
                 <div class="buttons">
                     <button @click="update">Edit</button>
-                    <button >Delete</button>
+                    <button @click="Delete">Delete</button>
                 </div>
             </div>
             <div class="content">
@@ -54,23 +54,12 @@ import { useStore } from "../../store/test"
 
 
 const route = useRoute()
+const router = useRouter()
 const id = route.params.id
 const productToEdit = ref('')
 const image = ref('')
 const store = useStore()
 
-
-
-
-
-const getProduct = async()=>{
-    const  res = await fetch(`http://homlee.api/products/findOneProduct/${id}`,{
-        method:'POST'
-    })
-    const json = await res.json()
-    productToEdit.value = json.data[0]
-    console.log(productToEdit.value);
-}
 
 
 const update = async()=>{
@@ -96,14 +85,25 @@ const update = async()=>{
             product.quantity =  productToEdit.value.quantity
             product.img = image.value || productToEdit.value.img
         }
-            
     });
 }
 
 
+const getProduct = async()=>{
+    const  res = await fetch(`http://homlee.api/products/findOneProduct/${id}`,{
+        method:'POST'
+    })
+    const json = await res.json()
+    productToEdit.value = json.data[0]
+}
 
-const Delete = ()=>{
-    
+
+
+
+
+const Delete =()=>{
+    // store.listProducts.filter(element=>element.id!==id)
+    // router.push("/dashboard/products")
 }
 
 

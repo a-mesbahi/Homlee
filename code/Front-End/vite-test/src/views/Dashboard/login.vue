@@ -26,6 +26,9 @@
 
 <script setup>
 import {ref} from "vue"
+import Cookies from 'js-cookie'
+import {useRouter} from "vue-router"
+const router = useRouter()
 const dataForm = ref({
     email:"",
     password:""
@@ -33,14 +36,19 @@ const dataForm = ref({
 
 
 const login = async()=>{
-    let res = await fetch("http://homlee.api/client/login",{
+    let res = await fetch("http://homlee.api/admin/login",{
         method:'POST',
         headers: { "Content-Type": "application/json" },
-        body:JSON.stringify(loginData.value)
+        body:JSON.stringify(dataForm.value)
     })
     let json = await res.json()
-    Cookies.set('idProfessional',json.data.id)
-    await router.push('/')
+    console.log(json);
+    if(json.data.status){
+        Cookies.set('tokenAdmin',json.data.token)
+        await router.push('/dashboard')
+    }else{
+        console.log("dhd");
+    }
 }
 
 
