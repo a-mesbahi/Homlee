@@ -4,7 +4,6 @@
             <h2>{{element.title}}</h2>
             <p class="date">Date : {{element.date}}</p>
             <p>{{element.description}}</p>
-            {{element.img}}
             <div class="img" :style="{ backgroundImage: 'url(/assets/' + element.img + ')' }">
             </div>
             <div class="tags">
@@ -21,7 +20,7 @@
 </template>
 
 <script setup>
-import {computed} from "vue"
+import {computed,onMounted,ref} from "vue"
 import { usePros } from "../../store/test"
 import Cookies from 'js-cookie'
 
@@ -30,6 +29,12 @@ const store = usePros()
 const projects = computed(()=>store.professionalProjects)
 
 
+onMounted(()=>{
+    if(!Cookies.get('tokenPro')){
+        router.push('/login_prof')
+    }  
+    store.getProf(Cookies.get("tokenPro"))
+})
 </script>
 
 <style lang="scss" scoped>

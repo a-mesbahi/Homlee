@@ -47,7 +47,7 @@
 </template>
 
 <script setup>
-import {computed, onBeforeMount, onMounted} from "vue"
+import {computed, onBeforeMount, onMounted,ref} from "vue"
 import { usePros } from "../../store/test"
 import Cookies from 'js-cookie'
 import {useRouter} from 'vue-router'
@@ -56,9 +56,25 @@ const router  = useRouter()
 const store = usePros()
 
 const profile = computed(()=>store.professionalData)
+
 const logOut = async()=>{
     Cookies.remove('tokenPro')
 }
+
+const getProjects = async(token)=>{
+        let res = await fetch("http://homlee.api/professional/getProjects",{
+            method:"POST",
+            headers:{
+                Authorization:token,
+            }
+        })
+        let json = await res.json()
+        console.log(json);
+        store.professionalProjects = json.data
+}
+
+getProjects(Cookies.get('tokenPro'))
+
 
 onMounted(()=>{
     if(!Cookies.get('tokenPro')){

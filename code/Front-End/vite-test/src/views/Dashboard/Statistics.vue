@@ -75,6 +75,9 @@ $or : #bea100;
 .statistics{
     width: 100%;
     height: 100vh;
+    @media screen and (max-width:800px) {
+        height: max-content;
+    }
     .top-side{
         width: 100%;
         height: 10vh;
@@ -86,6 +89,9 @@ $or : #bea100;
     .underside{
         width: 100%;
         height: 90vh;
+        @media screen and (max-width:800px) {
+            height: max-content;
+        }
         .infos{
             width: 100%;
             height: max-content;
@@ -97,6 +103,10 @@ $or : #bea100;
             justify-content: space-around;
             box-sizing: border-box;
             padding: 20px;
+            @media screen and(max-width:800px) {
+                display: flex;
+                flex-direction: column;
+            }
             figure {
                 position: relative;
                 display: flex;
@@ -107,6 +117,10 @@ $or : #bea100;
                 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
                 transition: all 0.3s cubic-bezier(.25,.8,.25,1);
                 overflow: hidden;
+                @media screen and(max-width:800px) {
+                    width: 90%;
+                    height: 400px;
+                }
                 &:hover {
                     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
                     img {

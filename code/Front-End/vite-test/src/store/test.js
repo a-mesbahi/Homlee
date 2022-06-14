@@ -49,9 +49,9 @@ actions: {
             body:JSON.stringify(dataForm)
         })
         let json = await res.json()
-        this.professionalData = await json.data
-        if(!this.professionalData.error){
-            Cookies.set('tokenPro',this.professionalData.token)
+        if(!json.error){
+            this.professionalData = await json.data
+            Cookies.set('tokenPro',json.data.token)
         }
     },
     // async addProject(dataForm){

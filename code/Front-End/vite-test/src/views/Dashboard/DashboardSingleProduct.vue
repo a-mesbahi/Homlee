@@ -69,6 +69,7 @@ const getProduct = async()=>{
     })
     const json = await res.json()
     productToEdit.value = json.data[0]
+    console.log(productToEdit.value);
 }
 
 
