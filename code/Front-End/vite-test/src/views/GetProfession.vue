@@ -16,7 +16,7 @@
         >
         <div
         class="job-pic"
-        :style="{ backgroundImage: `url(/assets/${professional.img})` }"
+        :style="{ backgroundImage: `url(/assets/${professional.business_img})` }"
         >
         </div>
         <div class="profile-desc">

@@ -1,9 +1,10 @@
 <template>
     <div class="container" v-if="projects.length">
-        <router-link :to="{ name: 'SingleProduct', params: { id: element.id } }" tag="div" class="project" v-for="element in projects" :key="element.id" >
+        <router-link :to="{ name: 'SingleProduct', params: { id: element.id } }" tag="div" class="project" v-for="element in store.professionalProjects" :key="element.id" >
             <h2>{{element.title}}</h2>
             <p class="date">Date : {{element.date}}</p>
             <p>{{element.description}}</p>
+            {{element.img}}
             <div class="img" :style="{ backgroundImage: 'url(/assets/' + element.img + ')' }">
             </div>
             <div class="tags">
@@ -13,7 +14,7 @@
             </div>
         </router-link>
     </div>
-    <div class="noData" v-if="!projects.length">
+    <div class="noData" v-if="!store.professionalProjects.length">
             <img src="/public/assets/wait.png" alt="" srcset="">
             <p>HELLO! Create Your first project</p>
     </div>

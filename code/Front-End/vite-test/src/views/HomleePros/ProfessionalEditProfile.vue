@@ -64,7 +64,7 @@ const pop = ref(false)
 const store = usePros()
 
 const update = ()=>{
-    store.editProfile()
+    store.editProfile(Cookies.get("tokenPro"))
     pop.value = true
     setTimeout(() => {
     pop.value = false

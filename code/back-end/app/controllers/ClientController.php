@@ -1,10 +1,11 @@
 <?php
-header("Access-Control-Allow-Origin: *");
-header("Content-Type: application/json; charset=UTF-8 ");
-header("Access-Control-Allow-Methods: * ");
-header("Access-Control-Allow-Max-Age: 3600 ");
-header("Access-Control-Allow-Headers: * ");
 
+error_reporting(E_ALL);
+ini_set('display_errors', '1');
+require '../vendor/autoload.php';
+
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 
 
 class ClientController
@@ -89,13 +90,22 @@ class ClientController
             if($result = $client->getClient($emailCheck)){
                 $result = extract($result);
                 if(password_verify($passwordCheck,$password)){
+                    $iat = time();
+                    $payload_info = array(
+                        "iss"=>"localhost",
+                        "iat"=>$iat ,
+                        "nbf"=>$iat+10,
+                        "exp"=>$iat+86400,
+                        "aud"=>"myusers",
+                        "data"=>array(
+                            "id"=>$id
+                        ),
+                    );
+                    $secret_key = "msbToken";
+                    $jwt= JWT::encode($payload_info,$secret_key,'HS256');
                     $data['data'] = array(
-                        'id'=>$id,
-                        'fullname'=>$fullname,
-                        'email'=>$email,
-                        'number'=>$number,
-                        'is_admin'=>$is_admin,
-                        'is_pro'=>$is_pro,
+                        "status"=>1,
+                        'token'=>$jwt,
                     );
                     echo json_encode($data);
                 }else{

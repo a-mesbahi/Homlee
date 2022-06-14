@@ -47,7 +47,7 @@
 </template>
 
 <script setup>
-import {computed, onBeforeMount} from "vue"
+import {computed, onBeforeMount, onMounted} from "vue"
 import { usePros } from "../../store/test"
 import Cookies from 'js-cookie'
 import {useRouter} from 'vue-router'
@@ -57,15 +57,15 @@ const store = usePros()
 
 const profile = computed(()=>store.professionalData)
 const logOut = async()=>{
-    Cookies.remove('idPros')
+    Cookies.remove('tokenPro')
 }
 
-onBeforeMount(()=>{
-    if(!Cookies.get('idPros')){
+onMounted(()=>{
+    if(!Cookies.get('tokenPro')){
         router.push('/login_prof')
     }  
-    store.getProf(Cookies.get("idPros"))
-    store.getProjects(Cookies.get("idPros"))
+    store.getProf(Cookies.get("tokenPro"))
+    store.getProjects(Cookies.get("tokenPro"))
 })
 
 

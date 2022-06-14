@@ -80,6 +80,7 @@ const close = ()=>{
 
 
 const dataForm = ref({
+    id:"",
     business_name:"",
     professional_category:"",
     phone_number:"",
@@ -106,21 +107,18 @@ const getImg = (e)=>{
 
 
 const submit = async()=>{
-    !dataForm.value.business_name.length>0?error.value.business_nameLength = "make sure you enter your business name":""
-    !dataForm.value.professional_category.length>0?error.value.professional_category = "make sure you enter your professional category":""
-    !dataForm.value.phone_number.length>0?error.value.phone_number = "make sure you enter your phone number":""
-    !dataForm.value.address.length>0?error.value.address = "make sure you enter your address":""
-    !dataForm.value.business_site.length>0?error.value.business_site = "make sure you enter your business_site":""
-    !dataForm.value.name.length>0?error.value.business_site = "make sure you enter your business_site":""
     if(dataForm.value.business_name.length>0 && dataForm.value.professional_category.length>0 && dataForm.value.phone_number.length>0 && dataForm.value.address.length>0 && dataForm.value.business_site.length>0 && dataForm.value.name.length>0 && dataForm.value.email.length>0 && dataForm.value.password.length>0){
         let res = await fetch("http://homlee.api/professional/addProfessional",{
             method:"POST",
             body:JSON.stringify(dataForm.value)
         })
         let json = await res.json()
+        console.log(json);
+        dataForm.value.id = json.id
         store.listProfessionals.push(dataForm.value)
+        console.log(dataForm.value);
         dataForm.value = ref({
-            id:json.id,
+            id:"",
             business_name:"",
             professional_category:"",
             phone_number:"",

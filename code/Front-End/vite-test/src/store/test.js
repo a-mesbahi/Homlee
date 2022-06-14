@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import {ref} from 'vue'
+import {ref,computed} from 'vue'
 import { useRouter } from 'vue-router'
 import Cookies from 'js-cookie'
 
@@ -51,25 +51,30 @@ actions: {
         let json = await res.json()
         this.professionalData = await json.data
         if(!this.professionalData.error){
-            Cookies.set('idPros',this.professionalData.id)
+            Cookies.set('tokenPro',this.professionalData.token)
         }
     },
-    async addProject(dataForm){
-        let res = await fetch("http://homlee.api/professional/addProject",{
-            method:"POST",
-            body:JSON.stringify(dataForm)
-        })
-        this.professionalProjects.push(dataForm)
-    },
-    async editProfile(){
+    // async addProject(dataForm){
+    //     let res = await fetch("http://homlee.api/professional/addProject",{
+    //         method:"POST",
+    //         body:JSON.stringify(dataForm)
+    //     })
+    // },
+    async editProfile(token){
         let res = await fetch("http://homlee.api/professional/editProfile",{
             method:"POST",
-            body:JSON.stringify(this.professionalData)
+            body:JSON.stringify(this.professionalData),
+            headers:{
+                Authorization:token,
+            }
         })
     },
-    async getProf(id){
-        let res = await fetch(`http://homlee.api/professional/getOnePro/${id}`,{
-            method:"POST"
+    async getProf(token){
+        let res = await fetch(`http://homlee.api/professional/getOnePro`,{
+            method:"POST",
+            headers:{
+                Authorization:token,
+            }
         })
         let json = await res.json()
         this.professionalData = json.data[0]
@@ -77,12 +82,19 @@ actions: {
     async changePassword(passwordData){
         let res = await fetch("http://homlee.api/professional/changePassword",{
             method:"POST",
-            body:JSON.stringify(passwordData)
+            body:JSON.stringify(passwordData),
+
         })
     },
-    async getProjects(id){
-        let res = await fetch(`http://homlee.api/professional/getProjects/${id}`)
+    async getProjects(token){
+        let res = await fetch("http://homlee.api/professional/getProjects",{
+            method:"POST",
+            headers:{
+                Authorization:token,
+            }
+        })
         let json = await res.json()
+        console.log(json);
         this.professionalProjects = json.data
     }
 

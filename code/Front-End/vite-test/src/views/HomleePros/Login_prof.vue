@@ -44,7 +44,7 @@ const result = computed(()=>
 const login = async()=>{
     if(dataForm.value.email.length>0 && dataForm.value.password.length>0){
         await store.loginProfessional(dataForm.value)
-        if(Cookies.get("idPros")){
+        if(Cookies.get("tokenPro")){
             router.push('/professional/profile')
         }else{
             console.log("nnn");

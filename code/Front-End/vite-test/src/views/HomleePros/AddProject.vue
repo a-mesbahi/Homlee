@@ -23,14 +23,13 @@
             <input type="text"  @keyup.enter="addTag" v-model="tag">
             <div class="tags">
                 <span v-for="item in tagsArray" :key="item" @click="remove(item.id)">
-                    {{item.tag }}
+                    {{item.tag}}
                 </span>
             </div>
         </div>
         <div class="grp">
             <label for="">Description : </label>
             <textarea name="" id="" cols="30" rows="10" v-model="dataForm.description">
-
             </textarea>
         </div>
         <button @click="saveProject">Save Project</button>
@@ -42,17 +41,18 @@
 import {ref,reactive} from "vue"
 import Cookies from 'js-cookie'
 import { usePros } from "../../store/test"
+import {useRouter} from "vue-router"
 
 const store = usePros()
-
+const router = useRouter()
 
 const dataForm = ref({
-    idProfessional:Cookies.get('idPros'),
-    img:"",
+    id:"",
     title:"",
-    tags:[],
-    date:"",
     description:"",
+    tags:[],
+    img:"",
+    date:"",
 })
 
 const tag = ref('')
@@ -85,19 +85,20 @@ const remove = (id)=>{
 
 const saveProject = async()=>{
     dataForm.value.tags = tagsArray
-    store.addProject(dataForm.value)
-    dataForm.value.img = ""
-    dataForm.value.tags = []
-    dataForm.value.date = ""
-    dataForm.value.description = ""
+    let res = await fetch("http://homlee.api/professional/addProject",{
+        method:"POST",
+        body:JSON.stringify(dataForm.value),
+        headers:{
+            Authorization:Cookies.get("tokenPro"),
+        }
+    })
+    let json = await res.json()
+    dataForm.value.id = json.id
+    console.log(dataForm.value);
+    store.professionalProjects.push(dataForm.value)
+    
+    router.push("/professional/profile")
 
-
-    // let res = await fetch("http://homlee.api/professional/addProject",{
-    //     method:"POST",
-    //     body:JSON.stringify(dataForm.value)
-    // })
-    // let json = await res.json()
-    // console.log(json);
 
 }
 
