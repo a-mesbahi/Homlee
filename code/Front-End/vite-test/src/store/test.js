@@ -12,10 +12,14 @@ export const useStore = defineStore('test',{
         professionalInfos:null,
     }),
     actions : {
-        remove(id){
-            
-        }
+        async getProducts (){
+            let res = await fetch('http://homlee.api/products/findAllProducts')
+            let json  = await res.json()
+            this.listProducts = json.data
+        },
+        
     }
+
 })
 
 

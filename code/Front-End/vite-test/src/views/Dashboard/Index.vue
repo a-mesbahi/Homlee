@@ -52,12 +52,16 @@
 import {onMounted} from "vue"
 import Cookies from 'js-cookie'
 import {useRouter} from "vue-router"
+import { useStore } from '../../store/test.js' 
+
+const store = useStore()
 const router = useRouter()
 
 onMounted(()=>{
     if(!Cookies.get('tokenAdmin')){
         router.push('/dashboard/login')
     }
+    store.getProducts()
 })
 
 </script>

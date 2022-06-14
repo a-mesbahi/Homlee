@@ -14,11 +14,7 @@ const route = useRoute()
 
 
 
-const getProducts = async()=>{
-  let res = await fetch('http://homlee.api/products/findAllProducts')
-  let json  = await res.json()
-  store.listProducts = json.data
-}
+
 const getProfessionals = async()=>{
     let res = await fetch('http://homlee.api/professional/findAllProfessionals')
     let json  = await res.json()
@@ -30,7 +26,6 @@ const getProfessionals = async()=>{
 
 
 onMounted(() => {
-  getProducts()
   getProfessionals()
 })  
 

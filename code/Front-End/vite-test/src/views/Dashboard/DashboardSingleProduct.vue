@@ -101,9 +101,13 @@ const getProduct = async()=>{
 
 
 
-const Delete =()=>{
-    // store.listProducts.filter(element=>element.id!==id)
-    // router.push("/dashboard/products")
+const Delete = async ()=>{
+    let res = await fetch(`http://homlee.api/products/deleteProduct/${id}`)
+    let json  = await res.json()
+    console.log(json);
+    store.getProducts()
+    router.push("/dashboard/products")
+
 }
 
 
