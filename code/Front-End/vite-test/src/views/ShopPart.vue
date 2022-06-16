@@ -541,6 +541,12 @@ $or: #bea100;
     margin-top: 50px;
     width: 70%;
     height: max-content;
+    @media screen and (max-width:800px) {
+      width: 90%;
+      img{
+        width: 100%;
+      }
+    }
   }
 }
 

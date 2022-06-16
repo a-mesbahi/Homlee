@@ -118,7 +118,7 @@ $or : #bea100;
                 transition: all 0.3s cubic-bezier(.25,.8,.25,1);
                 overflow: hidden;
                 @media screen and(max-width:800px) {
-                    height: 468px;
+                    height: 534px;
                     width: 85%;
                 }
                 &:hover {
@@ -219,6 +219,9 @@ $or : #bea100;
                 box-sizing: border-box;
                 padding-bottom: 20px;
                 padding-top: 20px;
+                @media screen and (max-width:800px) {
+                    width: 85%;
+                }
                 .textarea{
                     display: flex;
                     flex-direction: column;

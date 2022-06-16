@@ -87,12 +87,12 @@ onMounted(()=>{
         width: 95%;
         height: 77.6vh;
         display: grid;
-        grid-template-columns: repeat(auto-fill,minmax(600px,1fr));
         gap: 30px;
         overflow: auto;
         box-sizing: border-box;
         padding: 10px;
         @media screen and (max-width:500px) {
+            display:flex;
             overflow: initial;
             height: max-content;
             flex-direction: column;
@@ -108,7 +108,7 @@ onMounted(()=>{
             justify-content: space-between;
             @media screen and (max-width:500px) {
                     height: max-content;
-                    width: 300px;
+                    // width: 300px;
                 }
             .top{
                 height: 50%;

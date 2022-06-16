@@ -163,6 +163,11 @@ onMounted(()=>{
                 width: 100%;
                 box-sizing: border-box;
                 padding: 10px;
+                position: sticky;
+                z-index: 999;
+                bottom: 0;
+                background-color: white;
+                border-top:1px solid rgb(211, 211, 211) ;
                 .logo{
                     display: none;
                 }

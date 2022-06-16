@@ -12,8 +12,7 @@
                 </div>
                 <div class="rest">
                     <p>{{prof.address}}</p>
-                    <div class="buttons">
-                        <button>Projects</button>
+                    <div class="buttons">   
                         <button @click="sendEmail(prof.email)">Send email</button>
                     </div>
                 </div>
@@ -79,6 +78,7 @@ getProfs()
         overflow: auto;
         margin: auto;
         @media screen and (max-width:800px) {
+            grid-template-columns: repeat(auto-fill, minmax(300px, 97%));
             overflow: initial;
             height: max-content;
             padding-left: 0px;

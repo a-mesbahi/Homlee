@@ -99,6 +99,10 @@ $or : #bea100;
         flex-direction: column;
         align-items: center;
         justify-content: space-evenly;
+        @media screen and (max-width:800px) {
+            width: 84%;
+            font-size: 14px;
+        }
         .input-grp{
             width: 80%;
             height: 70px;
