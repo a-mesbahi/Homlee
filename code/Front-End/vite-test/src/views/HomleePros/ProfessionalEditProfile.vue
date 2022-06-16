@@ -45,7 +45,7 @@
             </div>
         </form>
     </div>
-    <UpdateDone data-aos="fade-left" v-if="pop"/>
+    <UpdateDone element="profile" data-aos="fade-left" v-if="pop" />
 </template>
 
 <script setup>

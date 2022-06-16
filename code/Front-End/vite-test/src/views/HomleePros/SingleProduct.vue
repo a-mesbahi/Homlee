@@ -33,6 +33,7 @@
             <p class="delete" @click="deleteProject">Delete Project</p>
         </div>
     </div>
+    <UpdateDone element="project" data-aos="fade-left" v-if="pop" />
 </template>
 
 <script setup>
@@ -40,9 +41,14 @@ import { useRoute,useRouter } from 'vue-router'
 import {ref,onMounted, onBeforeMount,computed} from "vue"
 import { usePros } from "../../store/test"
 import Cookies from 'js-cookie'
+import UpdateDone from "../../components/UpdateDone.vue"
+
+
+const pop = ref(false)
 
 const store = usePros()
 const route = useRoute()
+const router = useRouter()
 const project = ref('')
 const tag = ref('')
 const token = Cookies.get("tokenPro")
@@ -104,12 +110,24 @@ const update = async()=>{
             element.date = project.value.date
         }
     })
+    pop.value = true
+    setTimeout(() => {
+    pop.value = false
+    },2000);
 }
 
-const deleteProject = ()=>{
+const deleteProject = async()=>{
+    let res = await fetch(`http://homlee.api/professional/deleteProject/${id}`,{
+        method:"POST",
+        headers:{
+            Authorization:token
+        }
+    })
+    let json = res.json()
     store.professionalProjects = store.professionalProjects.filter(e=>{
         return e.id!=project.value.id
     })
+    router.push("/professional/profile")
 }
 
 getSingleProject(id,token)

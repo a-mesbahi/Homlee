@@ -2,13 +2,16 @@
     <div class="popUp-container">
         <div class="popUp">
             <img src="/public/assets/good.png" alt="" srcset="">
-            <h4>your profile has been modified</h4>
+            <h4>your {{element}} has been modified</h4>
         </div>
     </div>
 </template>
 
 <script setup>
-
+const props = defineProps({
+    element:String
+})
+const element = props.element
 </script>
 
 <style lang="scss" scoped>
