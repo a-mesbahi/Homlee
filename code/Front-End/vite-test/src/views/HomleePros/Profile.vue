@@ -69,7 +69,6 @@ const getProjects = async(token)=>{
             }
         })
         let json = await res.json()
-        console.log(json);
         store.professionalProjects = json.data
 }
 

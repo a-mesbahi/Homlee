@@ -74,13 +74,7 @@ const addTag = ()=>{
     }
 }
 
-const remove = (id)=>{
-    for (let index = 0; index < tagsArray.length; index++) {
-        if (tagsArray[index].id == id) {
-            tagsArray.splice(index,1);
-        }
-    }
-}
+
 
 
 const saveProject = async()=>{

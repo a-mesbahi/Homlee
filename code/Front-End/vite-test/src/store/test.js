@@ -26,7 +26,11 @@ export const useStore = defineStore('test',{
 
 
 
+export const adminStore = defineStore('admin',{
+    state:()=>({
 
+    })
+})
 
 
 
@@ -97,9 +101,18 @@ actions: {
             }
         })
         let json = await res.json()
-        console.log(json);
         this.professionalProjects = json.data
+    },
+    async getSingleProject(id,token){
+        let res = await fetch(`http://homlee.api/professional/getSingleProjct/${id}`,{
+            method:"POST",
+            headers:{
+                Authorization:token
+            }
+        })
+        let json = await res.json()
+        let result = await json.data[0]
+        await result
     }
-
 },
 })

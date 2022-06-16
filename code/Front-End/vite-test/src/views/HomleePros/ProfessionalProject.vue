@@ -1,6 +1,6 @@
 <template>
     <div class="container" v-if="projects.length">
-        <router-link :to="{ name: 'SingleProduct', params: { id: element.id } }" tag="div" class="project" v-for="element in store.professionalProjects" :key="element.id" >
+        <router-link v-for="element in store.professionalProjects" :to="{ name: 'SingleProduct', params: { id: element.id } }" tag="div" class="project"  :key="element.id" >
             <h2>{{element.title}}</h2>
             <p class="date">Date : {{element.date}}</p>
             <p>{{element.description}}</p>
@@ -134,9 +134,10 @@ onMounted(()=>{
                 padding: 6px;
                 padding-left: 12px;
                 padding-right: 12px;
-                background-color: rgba(0, 0, 0, 0.896);
-                color: white;
-                border-radius:30px ;
+                background-color: white;
+                color: black;
+                // border-radius:30px ;
+                border: 1px solid;
                 margin-right: 10px;
                 @media screen and (max-width:800px) {
                     padding: 2px;
