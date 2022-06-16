@@ -61,7 +61,7 @@ const getProduct = async()=>{
 }
 
 onMounted(()=>{
-    if(!Cookies.get('id')){
+    if(!Cookies.get('token')){
         router.push('/login')
     }
     getProduct()
@@ -102,7 +102,9 @@ onMounted(()=>{
         height: 100%;
         display: flex;
         align-items: center;
-        // background-color: crimson;  
+        @media screen and (max-width:800px) {
+            width: 93%;
+        }
         .presentation-of-product{
             width: 100%;
             height: 50%;

@@ -1,12 +1,17 @@
 <template>
     <div class="projects-container">
-        <div class="project" >
+        <div class="projects-empty" v-if="!projects.length">
+            <img src="/assets/emptyData.png" alt="" srcset="">
+            <p>It's seems that there is no projects for these professional</p>
+        </div>
+        <div class="project" v-else v-for="project in projects" :key="project.id" >
             <div class="img">
                 <h4>Homlee</h4>
-                <div class="content" :style="{ backgroundImage: 'url(/assets/plumbing.jpg)' }">
+                <div class="content" :style="{ backgroundImage: `url(/assets/${project.img})` }">
                 </div>
             </div>
             <div class="project-infos">
+                
                 <section>
                     <div class='scrolldown' style="--color: black">
                         <div class="chevrons">
@@ -14,12 +19,11 @@
                             <div class='chevrondown'></div>
                         </div>
                     </div>
-                    <h1>ARCHI STUDIO</h1>
-                    <p>BUSINESS PROJECT FOR CLIENTS</p>
+                    <h1>{{project.professional_category}}</h1>
+                    <p>{{project.title}}</p>
                 </section>
                 <section>
-                    <p>The function object type has a constructor: Function.
-                    When Function is invoked as a constructor new Function(arg1, arg2, ..., argN, bodyString), a new function is created. The arguments arg1, args2, ...,argN passed to constructor become the parameter names for the new function and the last argument bodyString is used as the function body code.</p>
+                    <p>{{project.description}}</p>
                     <span>Date : 08-11-2002</span>
                 </section>
             </div>
@@ -28,6 +32,23 @@
 </template>
 
 <script setup>
+import {ref, onMounted} from "vue"
+import {useRoute} from "vue-router"
+const route = useRoute()
+const id = route.params.id
+const projects = ref([])
+
+const getProjects = async ()=>{
+    let res = await fetch(`http://homlee.api/client/getPorProjects/${id}`)
+    let json = await res.json()
+    projects.value = json.data
+    console.log(json.data);
+}
+
+onMounted(()=>{
+    getProjects()
+})
+
 
 </script>
 
@@ -40,6 +61,21 @@
     flex-direction: column;
     align-items: center;
     margin-top: 60px;
+    .projects-empty{
+        margin:-30px;
+        width: 80%;
+        height:90vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        img{
+            width: 60%;
+        }
+        p{
+            background-color: crimson;
+        }
+    }
     .project{
         width: 80%;
         height: 500px;

@@ -33,10 +33,10 @@
                 </li>
 
                 <li>
-                    <router-link to="" >
+                    <a @click="logOut">
                         <img src="https://img.icons8.com/ios/50/000000/exit.png"/>
                         <p>Log out</p>
-                    </router-link>
+                    </a>
                 </li>
                 
             </ul>
@@ -57,13 +57,16 @@ import { useStore } from '../../store/test.js'
 const store = useStore()
 const router = useRouter()
 
+const logOut = ()=>{
+    Cookies.remove('tokenAdmin')
+    router.push('/')
+}
 onMounted(()=>{
     if(!Cookies.get('tokenAdmin')){
         router.push('/dashboard/login')
     }
     store.getProducts()
 })
-
 </script>
 
 <style scoped lang="scss">

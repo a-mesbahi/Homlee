@@ -61,6 +61,10 @@ onMounted(()=>{
     overflow: auto;
     box-sizing: border-box;
     padding: 10px;
+    @media screen and (max-width:800px) {
+        height: max-content;
+        overflow: hidden;
+    }
     .container::-webkit-scrollbar-track
     {
         -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
@@ -92,6 +96,9 @@ onMounted(()=>{
         display: flex;
         flex-direction: column;
         justify-content: space-evenly;
+        @media screen and (max-width:800px) {
+            width:85%;
+        }
         p{
             font-size: 14px;
             font-weight: 550;
@@ -131,6 +138,11 @@ onMounted(()=>{
                 color: white;
                 border-radius:30px ;
                 margin-right: 10px;
+                @media screen and (max-width:800px) {
+                    padding: 2px;
+                    padding-left: 8px;
+                    padding-right: 9px;
+                }
             }
         }
     }

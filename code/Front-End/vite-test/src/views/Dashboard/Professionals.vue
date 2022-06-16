@@ -78,7 +78,9 @@ getProfs()
         column-gap: 70px;
         overflow: auto;
         margin: auto;
-        @media screen and (max-width:500px) {
+        @media screen and (max-width:800px) {
+            overflow: initial;
+            height: max-content;
             padding-left: 0px;
             padding-right: 0px;
         }

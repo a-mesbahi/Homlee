@@ -217,6 +217,9 @@ onMounted(()=>{
 }
 @media screen and (max-width:900px) {
     .container{
+        img{
+            display: none;
+        }
         .container-infos{
             display: none;
         }
@@ -224,6 +227,7 @@ onMounted(()=>{
             display: flex;
             flex-direction: column;
             align-items: center;
+            
             .profile-info{
                 display: flex;
                 flex-direction: row;
@@ -243,6 +247,7 @@ onMounted(()=>{
                 .barre-menu{
                     ul{
                         width: 41%;
+                        font-size: 12px;
                     }
                 }
             }

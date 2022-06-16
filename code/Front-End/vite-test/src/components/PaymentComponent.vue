@@ -46,7 +46,7 @@
                 <div class="input-grp">
                     <div>
                         <label for="">City</label>
-                        <input type="text" placeholder="City" v-model="city">
+                        <input type="text" placeholder="City" v-model="data.address">
                     </div>
                     <div>
                         <label for="">Market</label>
@@ -68,26 +68,28 @@
                     <label for="">Card name</label>
                     <input type="text" placeholder="Card name" v-model="data.cardName">
                 </div>
-                <div class="input-grp">
+                <div class="input-grp city">
                     <div>
                         <label for="">City</label>
-                        <input type="text" placeholder="City" v-model="city">
+                        <input type="text" placeholder="City" v-model="data.address">
                     </div>
                     <div>
                         <label for="">Market</label>
                         <input type="text" placeholder="Market" v-model="country">
                     </div>
+                </div>
+                <div class="input-grp">
                     <div>
                         <label for="">Code cvv </label>
                         <input type="text" placeholder="code cvv " >
                     </div>
                     <div>
                         <label for="">Quantity</label>
-                        <input type="number" placeholder="Quantity" >
+                        <input type="number" placeholder="Quantity" v-model="data.quantity">
                     </div>
                 </div>
             </div>
-            <button>confirm order</button>
+            <button @click="complateOrder">confirm order</button>
         </div>
 
         <div class="total">
@@ -116,6 +118,8 @@ const city = ref('')
 const moreInfos = ref('')
 const country = ref('Morocco')
 
+const home = ref(false)
+
 const props = defineProps({
     product:Object
 })
@@ -123,7 +127,7 @@ const props = defineProps({
 const data = ref({
     product_id:props.product.id,
     address:'',
-    client_id:Cookies.get('id'),
+    client_id:Cookies.get('token'),
     cardName:'',
     quantity:''
 })
@@ -132,21 +136,25 @@ const DeliveryData = ()=>{
     showDeliveryData.value = true
     showShipping.value = false
     props.product.price+=5.9
+    home.value = true
 }
 
 const Payment = ()=>{
-    if(country.value && data.value.address){
-        showDeliveryData.value = false
-        showCartData.value = true
-        data.value.address = country.value+' '+city.value+' '+address.value
+    showCartData.value = true
+    showShipping.value = false
+    showDeliveryData.value=false
+    if(home.value){
+        data.value.address = data.value.address+' '+country.value+' '+address.value
     }
-    if(data.value.address.length==0 ){  
-        showShipping .value = false
-        showCartData.value = true
-        data.value.address = city.value+" Store"
+    if(!home.value){  
+        data.value.address = data.value.address+' '+'Store'
     }
 }
 
+const complateOrder = ()=>{
+    console.log(data.value);    
+    // console.log(city.value);
+}
 
 </script>
 
@@ -165,6 +173,10 @@ $or : #bea100;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+        @media screen and (max-width:800px) {
+            margin-bottom: 89px;
+            height: 354px;
+        }
         p{
             font-size: 18px;
             font-weight: 600;
@@ -192,6 +204,9 @@ $or : #bea100;
             height:90%;
             display: grid;
             grid-template-columns: repeat(auto-fill,minmax(50%,1fr));
+            .city{
+                margin-top: 20px;
+            }
             .input-grp{
                 height:80px;
                 display: flex;
@@ -214,11 +229,13 @@ $or : #bea100;
                 border-bottom:2px solid $or;
                 }
             }
-            .input-grp:last-child{
-                display: grid;
-                grid-template-columns: repeat(auto-fill,minmax(22%,1fr));
-                gap: 20px;
-            }
+            @media screen and (min-width:800px) {
+                    .input-grp:last-child{
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill,minmax(22%,1fr));
+                    gap: 20px;
+                    }
+                }
             
         }
 
@@ -384,6 +401,9 @@ $or : #bea100;
         align-items: center;
         padding: 10px;
         box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 3px 0px;
+        @media screen and (max-width:800px) {
+            margin-top: 20px;
+        }
         span{
             p{
                 color: gray;

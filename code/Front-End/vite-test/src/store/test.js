@@ -6,7 +6,7 @@ import Cookies from 'js-cookie'
 
 export const useStore = defineStore('test',{
     state: () => ({
-        // id:1,
+        
         listProducts:[],
         listProfessionals:[],
         professionalInfos:null,
@@ -63,12 +63,6 @@ actions: {
             Cookies.set('tokenPro',json.data.token)
         }
     },
-    // async addProject(dataForm){
-    //     let res = await fetch("http://homlee.api/professional/addProject",{
-    //         method:"POST",
-    //         body:JSON.stringify(dataForm)
-    //     })
-    // },
     async editProfile(token){
         let res = await fetch("http://homlee.api/professional/editProfile",{
             method:"POST",

@@ -21,12 +21,17 @@ const getProfessionals = async()=>{
     store.listProfessionals = json.data
 }
 
-
+const getProducts = async()=>{
+      let res = await fetch('http://homlee.api/products/findAllProducts')
+      let json  = await res.json()
+      store.listProducts = json.data
+}
 
 
 
 onMounted(() => {
   getProfessionals()
+  getProducts()
 })  
 
 

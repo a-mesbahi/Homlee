@@ -25,7 +25,7 @@
                     <div class="buttons">
                         <h4>{{item.product_name}}</h4>
                         <div class="checkbox">
-                            <input type="checkbox" >
+                            <input type="checkbox" @change="complateOrder(item.id)">
                             If the order completed
                         </div>
                     </div>
@@ -38,6 +38,8 @@
 
 <script setup>
 import {ref,onMounted} from "vue"
+import Cookies from 'js-cookie'
+
 const orders = ref([])
 const getOrders = async ()=>{
     let res = await fetch('http://homlee.api/admin/getOrders')
@@ -46,8 +48,17 @@ const getOrders = async ()=>{
     console.log(json.data)
 }
 
-const complateOrder = (id)=>{
-    console.log(id);
+const complateOrder = async(id)=>{
+    orders.value = orders.value.filter(order=>{
+        return order.id!=id
+    })
+    let res = await fetch(`http://homlee.api/admin/complateOrder/${id}`,{
+        method:"POST",
+        headers:{
+            Authorization:Cookies.get("tokenAdmin"),
+        }
+    })
+    let json = await res.json()
 }
 
 
@@ -82,8 +93,8 @@ onMounted(()=>{
         box-sizing: border-box;
         padding: 10px;
         @media screen and (max-width:500px) {
-            overflow-x:hidden ;
-            display: flex;
+            overflow: initial;
+            height: max-content;
             flex-direction: column;
             align-items: center;
         }
@@ -145,6 +156,7 @@ onMounted(()=>{
                     display: flex;
                     flex-direction: column;
                     justify-content: space-around;
+                    
                     @media screen and (max-width:500px) {
                         width: 100%;
                         margin-bottom: 10px;

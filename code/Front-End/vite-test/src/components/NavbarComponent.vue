@@ -7,7 +7,7 @@ import { useRouter, useRoute } from 'vue-router'
 const router = useRouter();
 
 let notLogin = computed(()=>{
-    if(Cookies.get('id')){
+    if(Cookies.get('token')){
         return false
     }else{
         return true
@@ -15,7 +15,7 @@ let notLogin = computed(()=>{
 
 })
 const login = computed(()=>{
-    if(Cookies.get('id')){
+    if(Cookies.get('token')){
         return true
     }else{
         return false
@@ -23,7 +23,7 @@ const login = computed(()=>{
 })
 
 const logOut = ()=>{
-    Cookies.remove('id')
+    Cookies.remove('token')
 }
 
 const store = useStore()

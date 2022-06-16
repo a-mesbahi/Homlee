@@ -199,6 +199,9 @@ const saveProject = async()=>{
             display: flex;
             align-items: center;
             justify-content: center;
+            @media screen and (max-width:800px) {
+                width: 90%;
+            }
             label{
                 color: black;
                 text-decoration: underline;

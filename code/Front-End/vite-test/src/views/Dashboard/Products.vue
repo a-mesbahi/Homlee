@@ -214,7 +214,13 @@ $or : #bea100;
             .product-price,.product-status,.product-sell,.product-info,.product-quantity{
                 display: flex;
                 align-items: center;
-                // justify-content: center;
+            }
+            @media screen and (max-width:800px) {
+                width: 90%;
+                grid-template-columns: 1fr 1fr 1fr ;
+                .product-quantity,.product-sell{
+                    display: none;
+                }
             }
         }
     }
@@ -227,9 +233,10 @@ $or : #bea100;
         row-gap:20px ;
         overflow: auto;
         justify-items: center;
-        @media screen and (max-width:700px) {
+        @media screen and (max-width:800px) {
             width: 95%;
             height: max-content;
+
         }
         .product{
             color: #000;
@@ -243,6 +250,12 @@ $or : #bea100;
             .product-price,.product-status,.product-sell,.product-quantity{
                 display: flex;
                 align-items: center;
+            }
+            @media screen and (max-width:800px) {
+                width: 89%;
+                .product-quantity,.product-sell{
+                    display: none;
+                }
             }
             .product-info{
                 width: 140px;
