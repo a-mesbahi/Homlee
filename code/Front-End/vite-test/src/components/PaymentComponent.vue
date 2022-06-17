@@ -44,14 +44,12 @@
                     <input type="text" placeholder="More information" v-model="moreInfos">
                 </div>
                 <div class="input-grp">
-                    <div>
-                        <label for="">City</label>
-                        <input type="text" placeholder="City" v-model="data.address">
-                    </div>
-                    <div>
-                        <label for="">Market</label>
-                        <input type="text" placeholder="Market" v-model="country">
-                    </div>
+                    <label for="">City</label>
+                    <input type="text" placeholder="City" v-model="data.address">
+                </div>
+                <div class="input-grp">
+                    <label for="">Market</label>
+                    <input type="text" placeholder="Market" v-model="country">
                 </div>
             </div>
             <button  @click="Payment">Continue</button>
@@ -59,7 +57,7 @@
 
         <div class="paymentCart" v-if="showCartData">
             <p>CARD DATA</p>
-            <div class="form">
+            <div class="formContainer">
                 <div class="input-grp">
                     <label for="">Card number</label>
                     <input type="text" placeholder="Card number" >
@@ -79,14 +77,12 @@
                     </div>
                 </div>
                 <div class="input-grp">
-                    <div>
-                        <label for="">Code cvv </label>
-                        <input type="text" placeholder="code cvv " >
-                    </div>
-                    <div>
-                        <label for="">Quantity</label>
-                        <input type="number" placeholder="Quantity" v-model="data.quantity">
-                    </div>
+                    <label for="">Code cvv </label>
+                    <input type="text" placeholder="code cvv " >
+                </div>
+                <div class="input-grp">
+                    <label for="">Quantity</label>
+                    <input type="number" placeholder="Quantity" v-model="data.quantity">
                 </div>
             </div>
             <button @click="complateOrder">confirm order</button>
@@ -140,20 +136,23 @@ const DeliveryData = ()=>{
 }
 
 const Payment = ()=>{
-    showCartData.value = true
-    showShipping.value = false
-    showDeliveryData.value=false
-    if(home.value){
-        data.value.address = data.value.address+' '+country.value+' '+address.value
-    }
-    if(!home.value){  
-        data.value.address = data.value.address+' '+'Store'
+    if(country.value.length!=0 && data.value.address.length!=0 && address.value.length!=0  ){
+        showCartData.value = true
+        showShipping.value = false
+        showDeliveryData.value=false
+        if(home.value){
+            data.value.address = data.value.address+' '+country.value+' '+address.value
+        }
+        if(!home.value){  
+            data.value.address = data.value.address+' '+'Store'
+        }
+    }else{
+        console.log("nonono");
     }
 }
 
 const complateOrder = ()=>{
     console.log(data.value);    
-    // console.log(city.value);
 }
 
 </script>
@@ -167,15 +166,16 @@ $or : #bea100;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    margin-top: 89px;
     .paymentCart{
         width: 100%;
-        height: 40%;
+        height: max-content;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
         @media screen and (max-width:800px) {
             margin-bottom: 89px;
-            height: 354px;
+            height: max-content;
         }
         p{
             font-size: 18px;
@@ -198,54 +198,18 @@ $or : #bea100;
             &:hover{
                 cursor: pointer;
             }
-        }
-        .form{
-            width: 100%;
-            height:90%;
-            display: grid;
-            grid-template-columns: repeat(auto-fill,minmax(50%,1fr));
-            .city{
-                margin-top: 20px;
-            }
-            .input-grp{
-                height:80px;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-                label{
-                    font-weight: bold;
-                }
-                input{
-                    width: 90%;
-                    height: 40px;
-                    border:none;
-                    border-bottom:2px solid;
-                    padding:6px ;
-                    font-size: 16px;
-                    background-color: rgba(247, 247, 247, 0.883);
-                }
-                input:focus{
-                outline: none;  
-                border-bottom:2px solid $or;
-                }
-            }
-            @media screen and (min-width:800px) {
-                    .input-grp:last-child{
-                    display: grid;
-                    grid-template-columns: repeat(auto-fill,minmax(22%,1fr));
-                    gap: 20px;
-                    }
-                }
-            
         }
 
     }
     .delivery-infos{
         width: 100%;
-        height: 40%;
+        height: max-content;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+        @media screen and (max-width:400px) {
+            font-size: 13px;
+        }
         p{
             font-size: 18px;
             font-weight: 600;
@@ -266,39 +230,6 @@ $or : #bea100;
             letter-spacing: 1px;
             &:hover{
                 cursor: pointer;
-            }
-        }
-        .form{
-            width: 100%;
-            height:80%;
-            display: grid;
-            grid-template-columns: repeat(auto-fill,minmax(50%,1fr));
-            .input-grp{
-                height:80px;
-                display: flex;
-                flex-direction: column;
-                justify-content: space-around;
-                label{
-                    font-weight: bold;
-                }
-                input{
-                    width: 95%;
-                    height: 40px;
-                    border:none;
-                    border-bottom:2px solid;
-                    padding:6px ;
-                    font-size: 16px;
-                    background-color: rgba(247, 247, 247, 0.883);
-                }
-                input:focus{
-                outline: none;  
-                border-bottom:2px solid $or;
-                }
-            }
-            .input-grp:last-child{
-                display: grid;
-                grid-template-columns: repeat(auto-fill,minmax(40%,1fr));
-                gap: 20px;
             }
         }
     }

@@ -63,7 +63,7 @@ const login = async()=>{
     })
     let json = await res.json()
     Cookies.set('token',json.data.token)
-    await router.push('/')
+    router.go(-1)
 }
 
 

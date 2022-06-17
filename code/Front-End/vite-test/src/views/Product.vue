@@ -84,7 +84,6 @@ onMounted(()=>{
     .img{
         width: 45%;
         height: 100%;
-        // background-color: cornflowerblue;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -94,7 +93,10 @@ onMounted(()=>{
             letter-spacing: 3px;
         }
         img{
-            max-width: 60%;
+            width: 60%;
+            @media screen and(max-width:500px) {
+                width: 200px;
+            }
         }
     }
     .product-info-shop{
@@ -111,6 +113,9 @@ onMounted(()=>{
             display: flex;
             flex-direction: column;
             justify-content: space-around;
+            @media screen and (max-width:800px) {
+                height: 81vh;
+            }
             .name-category{
                 p{
                     color: gray;

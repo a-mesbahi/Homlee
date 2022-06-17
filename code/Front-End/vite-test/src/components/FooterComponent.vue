@@ -35,7 +35,7 @@ $or : #bea100;
 footer{
     padding: 20px;
     margin: auto;
-    margin-top: 40px;
+    margin-top: 80px;
     width:70%;
     height: 300px;
     display: flex;
