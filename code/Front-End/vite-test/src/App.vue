@@ -80,6 +80,7 @@ $or : #bea100;
         border-bottom:2px solid;
         padding:6px ;
         font-size: 14px;
+        background-color: rgba(238, 238, 238, 0.307);
     }
     input:focus{
         outline: none;  

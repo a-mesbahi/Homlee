@@ -87,6 +87,7 @@ onMounted(()=>{
         width: 95%;
         height: 77.6vh;
         display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(600px, 1fr));
         gap: 30px;
         overflow: auto;
         box-sizing: border-box;

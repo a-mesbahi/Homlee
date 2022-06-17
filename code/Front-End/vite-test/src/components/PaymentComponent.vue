@@ -60,11 +60,11 @@
             <div class="formContainer">
                 <div class="input-grp">
                     <label for="">Card number</label>
-                    <input type="text" placeholder="Card number" >
+                    <input type="text" placeholder="Card number" v-model="cardNumber">
                 </div>
                 <div class="input-grp">
                     <label for="">Card name</label>
-                    <input type="text" placeholder="Card name" v-model="data.cardName">
+                    <input type="text" placeholder="Card name" v-model="data.Card_name">
                 </div>
                 <div class="input-grp city">
                     <div>
@@ -113,7 +113,7 @@ const address = ref('')
 const city = ref('')
 const moreInfos = ref('')
 const country = ref('Morocco')
-
+const cardNumber = ref('')
 const home = ref(false)
 
 const props = defineProps({
@@ -123,8 +123,7 @@ const props = defineProps({
 const data = ref({
     product_id:props.product.id,
     address:'',
-    client_id:Cookies.get('token'),
-    cardName:'',
+    Card_name:'',
     quantity:''
 })
 
@@ -136,23 +135,35 @@ const DeliveryData = ()=>{
 }
 
 const Payment = ()=>{
-    if(country.value.length!=0 && data.value.address.length!=0 && address.value.length!=0  ){
+    if(true){
         showCartData.value = true
         showShipping.value = false
         showDeliveryData.value=false
         if(home.value){
             data.value.address = data.value.address+' '+country.value+' '+address.value
         }
-        if(!home.value){  
+        if(!home.value){ 
             data.value.address = data.value.address+' '+'Store'
         }
     }else{
         console.log("nonono");
     }
 }
-
-const complateOrder = ()=>{
-    console.log(data.value);    
+const token = Cookies.get('token')
+const complateOrder = async ()=>{
+    let res = await fetch("http://homlee.api/client/addOrder",{
+        method:"POST",
+        body:JSON.stringify(data.value),
+        headers:{
+            Authorization:token
+        }
+    })
+    let json = await res.json()   
+    data.value.quantity ="" 
+    data.value.Card_name ="" 
+    data.value.address ="" 
+    address.value ="" 
+    cardNumber.value ="" 
 }
 
 </script>
@@ -207,6 +218,7 @@ $or : #bea100;
         display: flex;
         flex-direction: column;
         justify-content: space-around;
+        
         @media screen and (max-width:400px) {
             font-size: 13px;
         }

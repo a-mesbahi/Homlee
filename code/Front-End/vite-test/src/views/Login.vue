@@ -106,6 +106,7 @@ $or : #bea100;
             flex-direction: column;
             margin-bottom: 20px;
             font-weight: bold;
+            
             input{
                 height: 40px;
                 border:none;
