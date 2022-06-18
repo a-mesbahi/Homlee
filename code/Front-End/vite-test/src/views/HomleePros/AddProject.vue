@@ -3,14 +3,14 @@
         <div class="form-container">
             <div class="img-upload">
             <label for="firstImg" class="">
-                <img src="https://img.icons8.com/ios/50/undefined/upload-to-cloud--v1.png"/>
-                Import Your Projects Picture
+                <img src="https://img.icons8.com/ios-filled/50/undefined/upload-to-cloud--v1.png"/>
+                Upload cover image 
             </label>
             <input type="file" id="firstImg" @change="getImg" accept="image/png, image/gif, image/jpeg">
         </div>
         <div class="super-grp">
             <div class="grp">
-            <label for="">Project title</label>
+            <label for="">Project Title</label>
             <input type="text" placeholder="Project title " v-model="dataForm.title">
         </div>
         <div class="grp">
@@ -198,8 +198,8 @@ const saveProject = async()=>{
             }
             label{
                 color: black;
-                text-decoration: underline;
                 display: flex;
+                flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 &:hover{

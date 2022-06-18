@@ -81,6 +81,7 @@ onMounted(()=>{
     height: 800px;
     display: flex;
     justify-content: space-around;
+    position: relative;
     .img{
         width: 45%;
         height: 100%;

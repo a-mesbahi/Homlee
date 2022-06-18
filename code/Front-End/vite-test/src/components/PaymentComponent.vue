@@ -98,12 +98,20 @@
             </span>
         </div>
     </div>
+    <PaymentComplated v-if="complate" @close="close" />
 </template>
 
 <script setup>
 import {ref} from 'vue'
 import Cookies from 'js-cookie'
+import PaymentComplated from "./PaymentComplated.vue"
 
+const complate = ref(false)
+
+const close = ()=>{
+    complate.value = false
+    
+}
 const showShipping = ref(true)
 const showPayment = ref(false)  
 const showDeliveryData = ref(false)
@@ -164,6 +172,7 @@ const complateOrder = async ()=>{
     data.value.address ="" 
     address.value ="" 
     cardNumber.value ="" 
+    complate.value=true
 }
 
 </script>

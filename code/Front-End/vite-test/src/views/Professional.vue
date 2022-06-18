@@ -1,8 +1,7 @@
 <template>
     <div class="projects-container">
         <div class="projects-empty" v-if="!projects.length">
-            <img src="/assets/emptyData.png" alt="" srcset="">
-            <p>It's seems that there is no projects for these professional</p>
+            <img src="/assets/empty.png" alt="" srcset="">
         </div>
         <div class="project" v-else v-for="project in projects" :key="project.id" >
             <div class="img">
@@ -66,15 +65,11 @@ onMounted(()=>{
         width: 80%;
         height:90vh;
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        
+        justify-content: center;
         img{
-            width: 60%;
+            // width: 45%;
         }
-        p{
-            background-color: crimson;
-        }
+        
     }
     .project{
         width: 80%;

@@ -448,6 +448,7 @@ $or: #bea100;
       grid-template-columns: repeat(12, 1fr);
       column-gap: 40px;
       overflow-x: auto;
+      scroll-snap-type: x mandatory;
       overflow-y: hidden;
       box-sizing: border-box;
       &::-webkit-scrollbar {

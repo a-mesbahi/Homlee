@@ -19,6 +19,7 @@
                 validation="required"
                 v-model="dataForm.password"
             />
+            <p class="error" v-if="error">Invalid login data</p>
             <button @click="login">Login</button>
         </div>
     </div>
@@ -32,7 +33,7 @@ import Cookies from 'js-cookie'
 
 const store = usePros()
 const router = useRouter();
-
+const error = ref(false)
 const dataForm = ref({
     email:"",
     password:""
@@ -44,11 +45,15 @@ const result = computed(()=>
 const login = async()=>{
     if(dataForm.value.email.length>0 && dataForm.value.password.length>0){
         await store.loginProfessional(dataForm.value)
-        if(Cookies.get("tokenPro")){
-            router.push('/professional/profile')
-        }else{
-            console.log("nnn");
-        }
+
+        setTimeout(()=>{
+            if(Cookies.get("tokenPro")){
+                router.push('/professional/profile')
+            }else{
+                error.value = true
+            }
+        },1500)
+        
     }
 }
 
@@ -102,6 +107,10 @@ $or : #bea100;
         @media screen and (max-width:800px) {
             width: 84%;
             font-size: 14px;
+        }
+        .error{
+            width: 80%;
+            color: red;
         }
         .input-grp{
             width: 80%;

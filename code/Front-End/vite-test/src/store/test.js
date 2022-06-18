@@ -62,9 +62,11 @@ actions: {
             body:JSON.stringify(dataForm)
         })
         let json = await res.json()
-        if(!json.error){
+        if(!json.data.error){
             this.professionalData = await json.data
             Cookies.set('tokenPro',json.data.token)
+        }else{
+            return "false" 
         }
     },
     async editProfile(token){

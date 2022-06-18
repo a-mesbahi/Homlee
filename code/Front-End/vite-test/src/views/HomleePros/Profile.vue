@@ -1,6 +1,7 @@
 <template>
     <div class="container">
         <div class="container-infos">
+            Homlee For Pros
         </div>
         <div class="content">
             <div class="profile-info">
@@ -100,6 +101,12 @@ onMounted(()=>{
         height: 300px;
         background-color: #2d3436;
         background-image: linear-gradient(315deg, #2d3436 0%, #000000ab 74%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 60px;
+        letter-spacing: 5px;
+        font-weight: bolder;
     }
     .content{
         width: 100%;
