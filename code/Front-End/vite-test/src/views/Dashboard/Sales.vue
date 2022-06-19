@@ -49,9 +49,6 @@ const getOrders = async ()=>{
 }
 
 const complateOrder = async(id)=>{
-    orders.value = orders.value.filter(order=>{
-        return order.id!=id
-    })
     let res = await fetch(`http://homlee.api/admin/complateOrder/${id}`,{
         method:"POST",
         headers:{
@@ -59,6 +56,10 @@ const complateOrder = async(id)=>{
         }
     })
     let json = await res.json()
+    orders.value = orders.value.filter(order=>{
+        return order.id!=id
+    })
+    
 }
 
 

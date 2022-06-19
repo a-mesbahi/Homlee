@@ -5,7 +5,7 @@
         </div>
         <div class="underside">
             <div class="infos">
-                <figure class="image-block" v-for="element in adds" :key="element.id">
+                <figure class="image-block" v-for="element in adds" :key="element">
                     <h1>{{element.title}}</h1>
                     <img :src="element.url" alt="" />
                     <figcaption>
@@ -24,18 +24,18 @@
                 <div class="Add-from" v-if="addPop">
                     <div class="input-grp">
                         <label for="">Title : </label>
-                        <input type="text">
+                        <input type="text" v-model="dataForm.title">
                     </div>
                     <div class="input-grp">
                         <label for="">Image : </label>
-                        <input type="text">
+                        <input type="text" v-model="dataForm.url">
                     </div>
                     <div class="textarea">
                         <label for="">Description : </label>
-                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                        <textarea name="" id="" cols="30" rows="10" v-model="dataForm.description"></textarea>
                     </div>
                     <div class="button">
-                        <button>Save to gallery</button>
+                        <button @click="save">Save to gallery</button>
                     </div>
                 </div>
             </div>
@@ -46,14 +46,34 @@
 <script setup >
 import Courbe from "../../components/Courbe.vue"
 import {ref,onMounted} from "vue"
+import {adminStore} from "../../store/test"
+
+const store = adminStore()
+
 const addSection = ref(true)
 const addPop = ref(false)
+
+
+
+const dataForm = ref({
+    title:"",
+    url:"",
+    description:""
+})
 
 const toggle = ()=>{
     addSection.value = !addSection.value
     addPop.value = !addPop.value
 }
 const adds = ref([])
+
+const save = ()=>{
+    adds.value[2] = dataForm.value
+    store.addTogallery(dataForm.value)
+    dataForm.value.title = ""
+    dataForm.value.url = ""
+    dataForm.value.description = ""
+}
 
 const getAdds = async()=>{
     let res = await fetch("http://homlee.api/gallery/getForAdmin")

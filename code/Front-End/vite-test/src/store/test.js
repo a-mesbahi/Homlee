@@ -29,7 +29,17 @@ export const useStore = defineStore('test',{
 export const adminStore = defineStore('admin',{
     state:()=>({
 
-    })
+    }),
+    actions : {
+        async addTogallery(dataForm){
+            let res = await fetch("http://homlee.api/gallery/add",{
+                method:"POST",
+                body:JSON.stringify(dataForm)
+            })
+            let json  = await res.json()
+            console.log(json)
+        }
+    }
 })
 
 
