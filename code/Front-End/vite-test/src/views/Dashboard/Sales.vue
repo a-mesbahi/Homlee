@@ -25,7 +25,7 @@
                     <div class="buttons">
                         <h4>{{item.product_name}}</h4>
                         <div class="checkbox">
-                            <input type="checkbox" @change="complateOrder(item.id)">
+                            <input type="checkbox" @change="complateOrder(item.id,item)">
                             If the order completed
                         </div>
                     </div>

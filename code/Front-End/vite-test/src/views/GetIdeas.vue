@@ -4,7 +4,10 @@
         <div class="container">
             <div v-for="picture in pictures" :key="picture.id" >
                 <img :src="picture.url" alt="">
-                <span>{{picture.date_creation}}<img src="https://img.icons8.com/ios/24/000000/like--v1.png"/></span>
+                <span>
+                    {{picture.date_creation}}
+                    <!-- <img src="https://img.icons8.com/ios/24/000000/like--v1.png"/> -->
+                </span>
                 <h2>{{picture.title}}</h2>
                 <p>{{picture.description}}</p>
             </div>

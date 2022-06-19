@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="grp">
-            <label for="">Date : </label>
+            <label for="">Description : </label>
             <textarea name="" id="" cols="30" rows="10" v-model="project.description"></textarea>
         </div>
         <div class="action">
