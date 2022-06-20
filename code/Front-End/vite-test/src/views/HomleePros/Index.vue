@@ -69,7 +69,7 @@
 <script setup>
 import {ref} from "vue"
 import { useStore } from "../../store/test.js"
-import Guide from "../../components/GuideComponent.vue"
+import Guide from "../../components/Popups/GuideComponent.vue"
 
 const popUp = ref(false)
 const store = useStore()

@@ -1,26 +1,22 @@
 <script setup>
 import {ref,computed} from 'vue'
 import { useStore } from "../../store/test"
-import AddProduct from "../../components/AddProduct.vue"
+import AddProduct from "../../components/Dashboard/AddProduct.vue"
 
 
 const store = useStore()
-
-const productsList = computed(()=>
-    store.listProducts
-)
-
-
-const toggleFilterMenu = ()=>{
-        filterMenu.value = !filterMenu.value
-}
 const filterMenu = ref(false)
-
 const AddProductForm = ref(false)
 
-const newProduct = ()=>{
-    AddProductForm.value = !AddProductForm.value
-}
+//get the product
+const productsList = computed(()=>store.listProducts)
+
+
+const toggleFilterMenu = ()=>{filterMenu.value = !filterMenu.value}
+
+
+//Open addProduct popUp
+const newProduct = ()=>{AddProductForm.value = !AddProductForm.value}
 
 
 

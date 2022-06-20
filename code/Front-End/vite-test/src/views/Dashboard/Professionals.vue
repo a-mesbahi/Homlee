@@ -13,7 +13,7 @@
                 <div class="rest">
                     <p>{{prof.address}}</p>
                     <div class="buttons">   
-                        <button @click="sendEmail(prof.email)">Send email</button>
+                        <a :href="`mailto: ${prof.email}`">Send email</a>
                     </div>
                 </div>
             </div>
@@ -24,16 +24,19 @@
 
 <script setup>
 import {ref} from "vue"
-import Email from "../../components/Email.vue"
+import Email from "../../components/Dashboard/Email.vue"
 const profs = ref('')
 
 const emailFrom = ref(false)
-const profEmail = ref("")
+const profEmail = ref({
+    email:"",
+    name:""
+})
 
-const sendEmail = (email)=>{
+const sendEmail = (email,name)=>{
     emailFrom.value = true
-    profEmail.value = email
-    console.log(email);
+    profEmail.value.email = email
+    profEmail.value.name = name
 }
 const close = ()=>{
     emailFrom.value = false
@@ -127,18 +130,9 @@ getProfs()
                     display: flex;
                     justify-content: space-around;
                     align-items: center;
-                    button{
-                        width: 120px;
-                        height: 45px;
-                        background-color: transparent;
-                        border: 1px solid;
-                        font-size: 16px;
-                        letter-spacing: 1px;
-                        &:hover{
-                            cursor: pointer;
-                            background-color: rgba(0, 0, 0, 0.848);
-                            color: white;
-                        }
+                    a{
+                        color: black;
+                        text-decoration: none;
                     }
                 }
             }

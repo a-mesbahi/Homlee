@@ -10,29 +10,54 @@
                 <p>Our Admine</p>
             </div>
             <div class="subject">
-                <input type="text" placeholder="Enter the subject">
+                <input type="text" placeholder="Enter the subject" v-model="dataForm.subject">
             </div>
             <div class="body">
-                <textarea name="" id="" cols="30" rows="10" placeholder="Enter body"></textarea>
+                <textarea name="" id="" cols="30" rows="10" placeholder="Enter body" v-model="dataForm.body"></textarea>
             </div>
             <div class="send">
-                <button>
+                <a href="mailto:xyz@abc.com">
                     Send now
                     <img src="/assets/send-email.png" alt="" srcset="">
-                </button>
+                </a >
             </div>
         </div>
     </div>
 </template>
 
 <script setup>
-const props = defineProps(['profEmail'])
+import {ref} from "vue"
+import Cookies from 'js-cookie'
 const emit = defineEmits(['close'])
+const props = defineProps({
+    profEmail:{
+        type:Object,
+        required:true
+    }
+})
+
+const dataForm = ref({
+    subject:"",
+    body:"",
+    name:props.profEmail.name,
+    email:"aminmsb2003@gmail.com"
+})
+
 const close = ()=>{
     emit("close")
 }
 
-
+const send = async()=>{
+    // let res = await fetch("http://homlee.api/admin/",{
+    //     method:"POST",
+    //     headers:{
+    //         Authorization:Cookies.get("tokenAdmin"),
+    //     },
+    //     body:JSON.stringify(dataForm.value)
+    // })
+    // let json = await res.json()
+    // console.log(json)
+}
 
 
 </script>

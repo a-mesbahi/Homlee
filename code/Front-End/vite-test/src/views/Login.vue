@@ -18,6 +18,7 @@
                         <p >Don't have an account ? <span @click="showRegisterFrom">Register</span></p>
                         <button >Login</button>
                     </div>
+                    <p v-if="error" class="error">Invalid details</p>
             </form>
             
         <div class="decoration-right">
@@ -39,7 +40,7 @@ import Cookies from 'js-cookie'
 const registerShow = ref(false)
 const loginShow = ref(true)
 const router = useRouter();
-
+const error = ref(false)
 
 const loginData = ref({
     email:"",
@@ -62,8 +63,17 @@ const login = async()=>{
         body:JSON.stringify(loginData.value)
     })
     let json = await res.json()
-    Cookies.set('token',json.data.token)
-    router.back()
+    if(!json.data.error){
+        Cookies.set('token',json.data.token)
+    }
+    setTimeout(()=>{
+            if(Cookies.get("token")){
+                router.back()
+            }else{
+                error.value = true
+            }
+    },1500)
+    
 }
 
 
@@ -95,6 +105,9 @@ $or : #bea100;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        .error{
+            color: red;
+        }
         h1{
             margin-top: -30px;
             margin-bottom: 20px;

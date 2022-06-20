@@ -99,7 +99,7 @@
                     <div class="input">
                         <FormKit
                         type="textarea"
-                        label="Your Essay"
+                        label="Desciption"
                         rows="08"
                         validation="required|text"
                         placeholder="Remember to write in complete sentences."
@@ -117,7 +117,7 @@
 
 <script setup>
 import {ref} from 'vue'
-import { useStore } from "../store/test.js"
+import { useStore } from "../../store/test.js"
 
 
 const store = useStore()

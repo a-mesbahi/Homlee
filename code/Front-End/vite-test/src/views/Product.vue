@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-import Payment from "../components/PaymentComponent.vue"
+import Payment from "../components/Popups/PaymentComponent.vue"
 import { useRoute,useRouter } from 'vue-router'
 import {onMounted,ref} from 'vue'
 import Cookies from 'js-cookie'

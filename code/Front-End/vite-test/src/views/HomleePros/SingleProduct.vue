@@ -41,7 +41,7 @@ import { useRoute,useRouter } from 'vue-router'
 import {ref,onMounted, onBeforeMount,computed} from "vue"
 import { usePros } from "../../store/test"
 import Cookies from 'js-cookie'
-import UpdateDone from "../../components/UpdateDone.vue"
+import UpdateDone from "../../components/Popups/UpdateDone.vue"
 
 
 const pop = ref(false)

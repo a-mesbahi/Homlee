@@ -104,7 +104,7 @@
 <script setup>
 import {ref} from 'vue'
 import Cookies from 'js-cookie'
-import PaymentComplated from "./PaymentComplated.vue"
+import PaymentComplated from "../PaymentComplated.vue"
 
 const complate = ref(false)
 

@@ -52,7 +52,7 @@
 import {ref,computed,reactive} from "vue"
 import { usePros } from "../../store/test"
 import Cookies from 'js-cookie'
-import UpdateDone from "../../components/UpdateDone.vue"
+import UpdateDone from "../../components/Popups/UpdateDone.vue"
 
 const passwordData = reactive({
     id:Cookies.get("idPros"),

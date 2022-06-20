@@ -5,7 +5,7 @@
         </div>
         <div class="underside">
             <div class="infos">
-                <figure class="image-block" v-for="element in adds" :key="element">
+                <figure class="image-block" v-for="element in adds" :key="element.id">
                     <h1>{{element.title}}</h1>
                     <img :src="element.url" alt="" />
                     <figcaption>
@@ -44,7 +44,6 @@
 </template>
 
 <script setup >
-import Courbe from "../../components/Courbe.vue"
 import {ref,onMounted} from "vue"
 import {adminStore} from "../../store/test"
 
@@ -56,8 +55,9 @@ const addPop = ref(false)
 
 
 const dataForm = ref({
-    title:"",
+    id:"",
     url:"",
+    title:"",
     description:""
 })
 
@@ -67,13 +67,15 @@ const toggle = ()=>{
 }
 const adds = ref([])
 
-const save = ()=>{
+//save post to gallery 
+const save = async()=>{
+
+    dataForm.value.id = adds.value[2].id
     adds.value[2] = dataForm.value
-    store.addTogallery(dataForm.value)
-    dataForm.value.title = ""
-    dataForm.value.url = ""
-    dataForm.value.description = ""
+    await store.addTogallery(dataForm.value)
+
 }
+
 
 const getAdds = async()=>{
     let res = await fetch("http://homlee.api/gallery/getForAdmin")
