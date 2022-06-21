@@ -107,7 +107,7 @@ class ProductsController{
         $data = [];
         $data['data'] = [];
         if($result= $product->single($id)){
-            extract($result);
+            extract($result);        
 
             $array=array(
                 'id'=>$id,
@@ -127,7 +127,6 @@ class ProductsController{
 
     public function updateProduct()
     {
-        
         $data =json_decode(file_get_contents("php://input"));
         if($data){
             $id = $data->id;
@@ -142,9 +141,6 @@ class ProductsController{
             }else{
                 $status = "Available";
             }
-        }else{
-            echo "Your infos are empty";
-        }
             $product = new Products();
             if($product->update($id,$name,$price,$category,$status,$quantity,$img,$description)){
                 echo json_encode(
@@ -153,12 +149,28 @@ class ProductsController{
             }else
             {
                 echo json_encode(
-                    array("message"=>"Client Account not created")
+                    array("message"=>"Porduct  not updated")
                 );
-            }
-    
+            }    
+        }else{
+            echo "Your infos are empty";
+        }
     }
 
-    
+    public function deleteProduct($id)
+    {
+        $product = new Products();
+        if($product->delete($id)){
+            echo json_encode(
+                array("message"=>"Product deleted")
+            );
+        }else
+        {
+            echo json_encode(
+                array("message"=>"Product not deleted")
+            );
+        
+        }
+    }
 
 }

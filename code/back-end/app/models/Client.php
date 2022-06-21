@@ -56,4 +56,5 @@ class Client extends DB
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    
 }

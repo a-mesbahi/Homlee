@@ -7,7 +7,7 @@ class DB
     private $password = "teste123";
     public function connect()
     {
-        $database = new PDO("mysql:host=$this->serverName;dbname=Homlee", $this->username, $this->password);
+        $database = new PDO("mysql:host=$this->serverName;dbname=HomleeDb", $this->username, $this->password);
         // mysqli_connect(HOST,USER,PASS,DBNAME);
 
         if($database){

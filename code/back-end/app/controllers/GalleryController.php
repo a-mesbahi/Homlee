@@ -63,5 +63,35 @@ class GalleryController{
         }
     }
 
+    public function add()
+    {
+        $data =json_decode(file_get_contents("php://input"));
+
+        if(isset($data->url) && isset($data->title) && isset($data->description)){
+            $url = $data->url;
+            $title = $data->title;
+            $description = $data->description;
+        }else{
+            echo "Your infos are empty";
+        }
+
+
+        if(isset($url) && isset($title) && isset($description) )
+        {
+            $gallery = new Gallery();
+            if($gallery->insert($title,$url,$description)){
+                http_response_code(200);
+                echo json_encode(
+                    array("message"=>"Your account have been created")
+                );
+            }else
+            {
+                http_response_code(400);
+                echo json_encode(
+                    array("message"=>"Client Account not created")
+                );
+            }
+        }
+    }
 
 }

@@ -9,9 +9,9 @@ use Firebase\JWT\Key;
 
 
 class AdminController extends Checker{
-    // private $jwt="";
-
     
+
+    //function to get ads 
     public function getAds()
     {
         $admin = new Admin();
@@ -30,6 +30,7 @@ class AdminController extends Checker{
         echo json_encode($array);
     }
 
+    //function for get orders for admin 
     public function getOrders()
     {
         $orders = new Orders();
@@ -63,6 +64,7 @@ class AdminController extends Checker{
         }
     }
 
+    //admin login function
     public function login()
     {
         $data =json_decode(file_get_contents("php://input"));
@@ -76,7 +78,7 @@ class AdminController extends Checker{
             $data['data'] =[];
             $admin = new Admin();
             if($result = $admin->login()){
-                $result = extract($result);
+                extract($result);
                 if(password_verify($passwordCheck,$password)){
                     $iat = time();
                     $payload_info = array(
@@ -90,11 +92,10 @@ class AdminController extends Checker{
                         ),
                     );
                     $secret_key = "msbToken";
-                    session_start();
-                    $_SESSION['jwt'] = JWT::encode($payload_info,$secret_key,'HS256');
+                    $jwt= JWT::encode($payload_info,$secret_key,'HS256');
                     $data['data'] = array(
                         "status"=>1,
-                        "id"=>$id
+                        "token"=>$jwt
                     );
                     echo json_encode($data);
                 }else{
@@ -116,20 +117,19 @@ class AdminController extends Checker{
 
     }
 
+
+    //send email function
     public function sendEmail()
     {
         $data = json_decode(file_get_contents("php://input"));
-        $id = $data->id;
-        session_start();
-        $jwt = $_SESSION['jwt']; 
-        $data =json_decode(file_get_contents("php://input"));
-        $result = parent::check($jwt,$id);
-        if($result){
+        $headers = getallheaders();
+        $token = $headers["Authorization"];
+        $id = parent::check($token);
+        if($id){
             $name = $data->name;
             $body = $data->body;
             $email = $data->email;
             $subject = $data->subject;
-
             $emailSend = new SendEmail();
             $result = $emailSend->admin($subject,$body,$name,$email);
             if($result){
@@ -148,7 +148,25 @@ class AdminController extends Checker{
 
     }
 
-
+    public function complateOrder($id)
+    {
+        $headers = getallheaders();
+        $token = $headers["Authorization"];
+        $result = parent::check($token);
+        if($result){
+            $orders = new Orders();
+            if($orders->complate($id)){
+                echo json_encode(
+                    array(
+                        "status"=>1,
+                        "message"=>"order complated"
+                    )
+                );
+            }
+        }else{
+            http_response_code(500);
+        }
+    }
 
 }
 

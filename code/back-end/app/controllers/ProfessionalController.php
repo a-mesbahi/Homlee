@@ -102,7 +102,7 @@ class ProfessionalController extends Checker{
                     $payload_info = array(
                         "iss"=>"localhost",
                         "iat"=>$iat ,
-                        "nbf"=>$iat+5,
+                        "nbf"=>$iat,
                         "exp"=>$iat+86400,
                         "aud"=>"myusers",
                         "data"=>array(
@@ -263,12 +263,12 @@ class ProfessionalController extends Checker{
     }
     
     public function getProjects()
-    {
+    {   
         $headers = getallheaders();
         $token = $headers["Authorization"];
         $id = parent::check($token);
         $projects = new Projects();
-        $results = $projects->get($id);
+        $results = $projects->getProfProjects($id);
         if($results){
             $array = array();
             $array['data'] = array();
@@ -277,6 +277,7 @@ class ProfessionalController extends Checker{
                 extract($row);
                 $projects = array(
                     'id'=>$id,
+                    'idProfessional'=>$idProfessional,
                     'title'=>$title,
                     'description'=>$description,
                     'tags'=>json_decode($tags),
@@ -295,4 +296,84 @@ class ProfessionalController extends Checker{
         }   
     }
 
+    public function getSingleProjct($id)
+    {
+        $data =json_decode(file_get_contents("php://input"));
+        $headers = getallheaders();
+        $token = $headers["Authorization"];
+        $result = parent::check($token);
+        $data = [];
+        $data['data'] = [];
+        if($result){
+            $projects = new Projects();
+            $project = $projects->getSingle($id);
+            extract($project); 
+            if($result==$idProfessional)  {
+                $array=array(
+                    'id'=>$id,
+                    'idProfessional'=>$idProfessional,
+                    'title'=>$title,
+                    'description'=>$description,
+                    'tags'=>json_decode($tags),
+                    'img'=>$img,
+                    'date'=>$date,
+                );
+                array_push($data['data'],$array);
+                echo json_encode($data);
+            }else{
+                http_response_code(400);
+            }
+        }
+    }
+
+    public function updateProject()
+    {
+        $data =json_decode(file_get_contents("php://input"));
+        $headers = getallheaders();
+        $token = $headers["Authorization"];
+        $id = parent::check($token);
+        if($data  && $id){
+            $id = $data->id;
+            $title = $data->title;
+            $description = $data->description;
+            $tags = json_encode($data->tags);
+            $img = $data->img;
+            $projects = new Projects();
+            $results = $projects->update($id,$title,$description,$tags,$img);
+            if($projects->update($id,$title,$description,$tags,$img)){
+                echo json_encode(
+                    array("update"=>"Success")
+                );
+            }else
+            {
+                echo json_encode(
+                    array("message"=>"Porduct  not updated")
+                );
+            }    
+        }else{
+            echo "Your infos are empty";
+        }
+    }
+
+    public function deleteProject($id)
+    {   
+        $data =json_decode(file_get_contents("php://input"));
+        $headers = getallheaders();
+        $token = $headers["Authorization"];
+        $result  = parent::check($token);
+        $product = new Projects();
+        if($result){
+            if($product->delete($id)){
+                echo json_encode(
+                    array("message"=>"Product deleted")
+                );
+            }else
+            {
+                echo json_encode(
+                    array("message"=>"Product not deleted")
+                );
+            
+            }
+        }
+    }
 }

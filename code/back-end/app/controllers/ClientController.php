@@ -8,7 +8,7 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
 
-class ClientController
+class ClientController extends Checker
 {
     
     public function all()
@@ -104,16 +104,15 @@ class ClientController
                     $secret_key = "msbToken";
                     $jwt= JWT::encode($payload_info,$secret_key,'HS256');
                     $data['data'] = array(
-                        "status"=>1,
+                        "error"=>false,
                         'token'=>$jwt,
                     );
                     echo json_encode($data);
                 }else{
-                    $message = array(
+                    $data["data"] = array(
                         'error'=>true,
                         'message'=>'Invalid login details'
                     );
-                    array_push($data['data'],$message);
                     echo json_encode($data);
                 }
                 
@@ -132,7 +131,77 @@ class ClientController
 
     public function user()
     {
-        echo $_COOKIE['idPros'];
+        
     }
     
+
+    public function getPorProjects($id)
+    {   
+        $projects = new Projects();
+        $results = $projects->get($id);
+        if($results){
+            $array = array();
+            $array['data'] = array();
+
+            while($row = $results->fetch(PDO::FETCH_ASSOC)){
+                extract($row);
+                $projects = array(
+                    'professional_category'=>$professional_category,
+                    'id'=>$id,
+                    'title'=>$title,
+                    'description'=>$description,
+                    'tags'=>json_decode($tags),
+                    'img'=>$img,
+                    'date'=>$date
+                );
+                array_push($array['data'],$projects);
+            }
+        echo json_encode($array);
+        }else
+        {
+            echo json_encode(
+                array('message'=>'no data is here')
+            );
+        } 
+    }
+
+
+    public function addOrder()
+    {
+        $data =json_decode(file_get_contents("php://input"));
+        $headers = getallheaders();
+        $token = $headers["Authorization"];
+        $result = parent::check($token);
+        if($result){
+            if(isset($data->product_id) && isset($result) && isset($data->address) && isset($data->Card_name) && isset($data->quantity)){
+                $idProfessional = $result;
+                $product_id = $data->product_id;
+                $client_id = $result;
+                $address = $data->address;
+                $Card_name = $data->Card_name;
+                $quantity = $data->quantity;
+            }else{
+                echo "Your infos are empty";
+            }
+    
+            if(isset($idProfessional) && isset($product_id) && isset($client_id)&& isset($address) && isset($Card_name) && isset($quantity) )
+            {
+                $professional = new Orders();
+                if($professional->add($product_id,$client_id,$address,$Card_name,$quantity)){
+                    http_response_code(200);
+                    echo json_encode(
+                        array(
+                            "message"=>"the order have been added ",
+                        )
+                    );
+                }else
+                {   
+                    http_response_code(400);
+                    echo json_encode(
+                        array("message"=>"order not created")
+                    );
+                    }
+                } 
+        }
+    }
 }

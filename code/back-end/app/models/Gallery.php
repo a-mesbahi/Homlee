@@ -1,7 +1,7 @@
 <?php 
 
 class Gallery extends DB{
-    private $table = "gallery_pictures";
+    private $table = "gallery";
     private $conn; 
 
     public function __construct()
@@ -28,14 +28,16 @@ class Gallery extends DB{
         return $stmt;
     }
 
-    public function insert($url)
+    public function insert($title,$url,$description)
     {
-        $query = "INSERT INTO $this->table SET url=:url";
+        $query = "INSERT INTO $this->table SET `url`=:url,`description` =:description, `title`= :title";
         $stmt = $this->conn->prepare($query);
         
         $stmt->bindParam(':url',$url);
+        $stmt->bindParam(':description',$description);
+        $stmt->bindParam(':title',$title);
         
         $stmt->execute();
         return $stmt;
     }
-}
+} 

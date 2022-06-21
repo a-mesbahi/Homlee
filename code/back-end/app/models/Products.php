@@ -37,8 +37,8 @@ class Products extends DB
         return $this->conn->lastInsertId();
     }
 
-    public function deleteRdv($id){
-        $query = "DELETE FROM $this->table WHERE idRdv = ?";
+    public function delete($id){
+        $query = "DELETE FROM $this->table WHERE id = ?";
         $stmt = $this->conn->prepare($query);
 
         $id = htmlspecialchars(strip_tags($id));
@@ -60,20 +60,19 @@ class Products extends DB
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function update($id,$name,$price,$category,$quantity,$status,$img,$description)
+    public function update($id,$name,$price,$category,$status,$quantity,$img,$description)
     {
-        $id = htmlspecialchars(strip_tags($id));
-        $name = htmlspecialchars(strip_tags($name));
-        $price= htmlspecialchars(strip_tags($price));
-        $category = htmlspecialchars(strip_tags($category));
-        $quantity = htmlspecialchars(strip_tags($quantity));
-        $status = htmlspecialchars(strip_tags($status));
-        $img = htmlspecialchars(strip_tags($img));
-        $description = htmlspecialchars(strip_tags($description));
-
-        $query = "UPDATE $this->table SET `name`='$name',`price`='$price',`category`='$category',`quantity`='$quantity',`status`='$status',`img`='$img',`description`='$description'WHERE id =$id ";
+        $query = "UPDATE $this->table SET `name`=:name,`price`=:price,`category`=:category,`status`=:status,`quantity`=:quantity,`img`=:img,`description`=:description WHERE id =:id ";
         $stmt = $this->conn->prepare($query);
 
+        $stmt->bindValue(':name',$name);
+        $stmt->bindValue(':price',$price);
+        $stmt->bindValue(':category',$category);
+        $stmt->bindValue(':quantity',$quantity);
+        $stmt->bindValue(':status',$status);
+        $stmt->bindValue(':img',$img);
+        $stmt->bindValue(':description',$description);
+        $stmt->bindValue(':id',$id);
 
 
         $stmt->execute();
